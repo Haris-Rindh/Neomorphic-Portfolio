@@ -1,28 +1,33 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Database, Layout, Code2, GitMerge } from 'lucide-react';
+import { Database, Layout, Code2, Cpu, Globe, Rocket } from 'lucide-react';
 import { TextReveal } from './TextReveal';
 
 const skillCategories = [
   {
-    title: 'Frontend Development',
+    title: 'Frontend Mastery',
     icon: Layout,
+    description: 'Crafting immersive, high-performance user interfaces with modern frameworks.',
+    color: 'text-blue-500',
     items: [
-      { name: 'HTML5 & CSS3', level: 'Expert' },
-      { name: 'JavaScript ES6+', level: 'Advanced' },
+      { name: 'React / Next.js', level: 'Expert' },
+      { name: 'TypeScript', level: 'Advanced' },
       { name: 'Tailwind CSS', level: 'Advanced' },
-      { name: 'React.js', level: 'Intermediate' },
-      { name: 'Framer Motion', level: 'Intermediate' },
+      { name: 'Framer Motion', level: 'Advanced' },
+      { name: 'Three.js / GSAP', level: 'Intermediate' },
     ]
   },
   {
-    title: 'Backend & Tools',
+    title: 'Backend & DevOps',
     icon: Database,
+    description: 'Building robust, scalable server-side systems and efficient databases.',
+    color: 'text-accent',
     items: [
-      { name: 'Node.js & Express', level: 'Intermediate' },
-      { name: 'MongoDB / SQL', level: 'In Progress' },
-      { name: 'Git & GitHub', level: 'Proficient' },
-      { name: 'REST APIs', level: 'Proficient' },
+      { name: 'Node.js & Express', level: 'Advanced' },
+      { name: 'MongoDB / PostgreSQL', level: 'Advanced' },
+      { name: 'Firebase / AWS', level: 'Intermediate' },
+      { name: 'Docker / CI/CD', level: 'Intermediate' },
+      { name: 'GraphQL / REST', level: 'Proficient' },
     ]
   }
 ];
@@ -34,51 +39,71 @@ const itemVariants = {
 
 export function Skills() {
   return (
-    <section id="skills" className="py-24 px-6 md:px-12 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-16 relative">
+    <section id="skills" className="py-32 px-6 md:px-12 w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-20 relative overflow-hidden">
       
+      {/* Background Decor */}
+      <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+
       {/* Sticky Left Hemisphere */}
-      <div className="w-full md:w-1/3">
-        <div className="sticky top-32 flex flex-col space-y-6">
-          <span className="text-accent font-mono text-xs uppercase tracking-widest bg-white/50 px-3 py-1 rounded-full w-max shadow-neo-flat-sm">Capabilities</span>
-          <h2 className="text-4xl md:text-6xl font-display font-medium text-text leading-tight uppercase">
-             <TextReveal text="TECHNICAL <br/> ARSENAL" />
-          </h2>
-          <p className="text-text-muted text-sm mt-4 max-w-xs leading-relaxed">
-            Consistently expanding my toolset to build fast, resilient, and beautifully animated experiences.
+      <div className="w-full lg:w-2/5">
+        <div className="sticky top-32 flex flex-col space-y-8">
+          <div className="flex flex-col space-y-4">
+             <span className="text-accent font-mono text-xs uppercase tracking-widest bg-white/60 px-4 py-1.5 rounded-full w-max shadow-neo-flat-sm border border-white/20">Technical Prowess</span>
+             <h2 className="text-5xl md:text-7xl font-display font-medium text-text leading-[0.9] uppercase">
+                <TextReveal text="TECHNICAL <br/> ARSENAL" />
+             </h2>
+          </div>
+          <p className="text-text-muted text-lg font-light leading-relaxed max-w-sm">
+            I don't just write code. I architect digital ecosystems designed for speed, scale, and emotional impact.
           </p>
+          
+          <div className="flex gap-4 pt-4">
+             <div className="w-12 h-12 neo-convex rounded-full flex items-center justify-center text-accent"><Code2 size={20} /></div>
+             <div className="w-12 h-12 neo-convex rounded-full flex items-center justify-center text-accent"><Cpu size={20} /></div>
+             <div className="w-12 h-12 neo-convex rounded-full flex items-center justify-center text-accent"><Globe size={20} /></div>
+          </div>
         </div>
       </div>
 
       {/* Scrolling Right Hemisphere */}
-      <div className="w-full md:w-2/3 flex flex-col space-y-16 mt-12 md:mt-0">
+      <div className="w-full lg:w-3/5 flex flex-col space-y-12">
         {skillCategories.map((category, idx) => (
           <motion.div
             key={category.title}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, margin: "-50px" }}
-            transition={{ staggerChildren: 0.1, delayChildren: 0.1 }}
-            className="p-8 md:p-10 neo-flat rounded-[32px] flex flex-col space-y-8 relative overflow-hidden group hover:shadow-neo-elevated transition-shadow duration-500"
+            transition={{ staggerChildren: 0.08, delayChildren: 0.1 }}
+            className="p-10 md:p-14 neo-flat rounded-[48px] flex flex-col space-y-10 relative overflow-hidden group border border-white/10"
           >
-            {/* Soft decorative blur */}
-            <div className="absolute -top-12 -right-12 w-32 h-32 bg-accent/10 blur-[40px] rounded-full pointer-events-none group-hover:bg-accent/20 transition-colors duration-500" />
+            {/* Animated accent glow */}
+            <div className="absolute -top-16 -right-16 w-48 h-48 bg-accent/5 blur-[60px] rounded-full pointer-events-none group-hover:bg-accent/15 transition-all duration-700 group-hover:scale-150" />
             
-            <motion.div variants={itemVariants} className="flex items-center space-x-4">
-              <div className="w-12 h-12 neo-concave rounded-full flex items-center justify-center border border-white/20 shadow-glass">
-                <category.icon className="text-accent w-5 h-5" />
+            <motion.div variants={itemVariants} className="space-y-4 relative z-10">
+              <div className="flex items-center space-x-5">
+                <div className="w-16 h-16 neo-concave rounded-3xl flex items-center justify-center border border-white/30 shadow-glass shrink-0">
+                  <category.icon className={`${category.color} w-8 h-8`} />
+                </div>
+                <div>
+                   <h3 className="text-3xl font-display font-medium text-text">{category.title}</h3>
+                   <p className="text-sm text-text-muted font-light">{category.description}</p>
+                </div>
               </div>
-              <h3 className="text-2xl font-display font-medium text-text">{category.title}</h3>
             </motion.div>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 relative z-10">
               {category.items.map((skill) => (
                 <motion.div 
                   variants={itemVariants}
                   key={skill.name} 
-                  className="neo-btn px-6 py-3 rounded-xl flex flex-col space-y-1 cursor-default"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="neo-btn p-5 rounded-[24px] flex flex-col space-y-2 cursor-pointer group/pill border border-transparent hover:border-accent/20 transition-all duration-300"
                 >
-                  <span className="font-sans font-semibold text-text text-sm group-hover/btn:text-accent transition-colors">{skill.name}</span>
-                  <span className="font-mono text-[10px] text-accent uppercase tracking-wider">{skill.level}</span>
+                  <span className="font-sans font-bold text-text text-sm group-hover/pill:text-accent transition-colors leading-tight">{skill.name}</span>
+                  <div className="flex items-center justify-between">
+                     <span className="font-mono text-[9px] text-text-muted uppercase tracking-wider">{skill.level}</span>
+                     <Rocket size={10} className="text-accent opacity-0 group-hover/pill:opacity-100 transition-opacity" />
+                  </div>
                 </motion.div>
               ))}
             </div>

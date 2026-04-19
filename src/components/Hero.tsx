@@ -123,18 +123,21 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.6 }}
           className="relative w-full aspect-square max-w-md"
         >
-          <motion.div style={{ y: yOrb }} className="absolute inset-0 neo-flat rounded-full shadow-neo-elevated flex items-center justify-center p-8">
-            <div className="w-full h-full neo-concave rounded-[3rem] border border-bg/50 flex flex-col items-center justify-center space-y-4 shadow-glass relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent pointer-events-none z-20" />
-
-              {/* Developer Avatar */}
+          <motion.div style={{ y: yOrb }} className="absolute inset-0 neo-flat rounded-full shadow-neo-elevated flex items-center justify-center p-6">
+            <div className="w-full h-full rounded-full border-2 border-white/30 relative overflow-hidden group shadow-neo-concave">
+              {/* Developer Photo */}
               <img
                 src={avatarImg}
                 alt="Haris Rindh"
-                className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700 z-0"
+                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
-
-              <div className="absolute inset-0 bg-black/20 z-10" />
+              {/* Subtle light overlay — simulates Neumorphic glass */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-black/10 pointer-events-none z-10" />
+              {/* Bottom label badge */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 bg-white/70 backdrop-blur-md px-3 py-1.5 rounded-full shadow-neo-flat-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                <span className="font-mono text-[10px] text-text uppercase tracking-widest whitespace-nowrap">Stack Specialist</span>
+              </div>
             </div>
           </motion.div>
 
