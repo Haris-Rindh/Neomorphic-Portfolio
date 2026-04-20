@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { Terminal, Menu } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Terminal, Menu, X } from 'lucide-react';
 import { Magnetic } from './Magnetic';
 
 const navItems = [
@@ -18,8 +18,11 @@ interface NavbarProps {
 }
 
 export function Navbar({ onOpenTerminal }: NavbarProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
-    <motion.nav
+    <>
+      <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl"
@@ -30,7 +33,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
           <span className="font-display font-medium text-text tracking-widest text-sm uppercase">HARIS.DEV</span>
         </div>
 
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden lg:flex items-center space-x-6">
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -44,12 +47,15 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
         </div>
 
         <Magnetic strength={0.2}>
-          <button className="neo-btn w-10 h-10 rounded-full flex items-center justify-center md:hidden">
+          <button 
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="neo-btn w-10 h-10 rounded-full flex items-center justify-center lg:hidden"
+          >
             <Menu size={18} className="text-text" />
           </button>
         </Magnetic>
 
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
            <button 
               onClick={onOpenTerminal}
               className="neo-btn px-6 py-2 rounded-full text-xs font-mono uppercase tracking-widest text-text hover:text-accent transition-colors"
@@ -59,5 +65,49 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
         </div>
       </div>
     </motion.nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] bg-bg/95 backdrop-blur-md flex flex-col items-center justify-center px-6"
+          >
+            <button 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute top-8 right-6 neo-btn w-12 h-12 rounded-full flex items-center justify-center"
+            >
+              <X size={24} className="text-text" />
+            </button>
+            <div className="flex flex-col space-y-8 items-center w-full">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-2xl font-display font-medium uppercase tracking-widest text-text hover:text-accent transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <div className="pt-8 border-t border-dark-shadow/20 w-full flex justify-center">
+                 <button 
+                    onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        onOpenTerminal();
+                    }}
+                    className="neo-btn px-8 py-4 rounded-full text-sm font-mono uppercase tracking-widest text-text hover:text-accent transition-colors"
+                 >
+                    Startup CLI
+                 </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

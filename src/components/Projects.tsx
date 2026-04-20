@@ -6,6 +6,7 @@ import {
   useTransform,
   useMotionValueEvent,
   useReducedMotion,
+  useSpring,
   type MotionValue,
 } from 'motion/react';
 import { ArrowUpRight, Github } from 'lucide-react';
@@ -213,17 +214,17 @@ function SpotlightCard({
         zIndex,
       }}
     >
-      <div className="w-full max-w-6xl h-[66vh] max-h-[540px] neo-flat rounded-[36px] overflow-hidden flex flex-col lg:flex-row group relative shadow-neo-elevated">
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row h-auto min-h-[55vh] lg:h-[70vh] lg:max-h-[540px] neo-flat rounded-[32px] md:rounded-[36px] overflow-hidden group relative shadow-neo-elevated items-stretch">
         {/* ── Left: Text content ── */}
-        <div className="flex-1 min-w-0 p-8 md:p-12 lg:p-14 flex flex-col justify-between z-10">
+        <div className="flex-1 w-full lg:w-[58%] min-w-0 p-6 md:p-12 lg:p-14 flex flex-col justify-between z-10 shrink-1 gap-6">
           <div className="space-y-4 md:space-y-5">
             <span className="inline-flex items-center font-mono text-[10px] text-accent uppercase tracking-widest bg-accent/10 py-1 px-3 rounded-full">
               {project.category}
             </span>
-            <h3 className="text-3xl md:text-4xl xl:text-5xl font-display font-bold text-text uppercase tracking-tight leading-[0.95]">
+            <h3 className="text-3xl md:text-4xl xl:text-5xl font-display font-bold text-text uppercase tracking-tight leading-[0.95] break-words hyphens-auto">
               {project.title}
             </h3>
-            <p className="max-w-sm text-text-muted text-sm md:text-base leading-relaxed">
+            <p className="max-w-md text-text-muted text-sm md:text-base leading-relaxed break-words">
               {project.description}
             </p>
             {/* Tech tags */}
@@ -262,7 +263,7 @@ function SpotlightCard({
         </div>
 
         {/* ── Right: Image ── */}
-        <div className="hidden lg:block w-[42%] shrink-0 neo-concave m-5 rounded-3xl overflow-hidden relative">
+        <div className="hidden lg:block w-[42%] shrink-0 neo-concave m-4 lg:m-6 rounded-3xl overflow-hidden relative self-stretch">
           <img
             src={project.image}
             alt={project.title}
@@ -360,6 +361,80 @@ function GridCard({ project, index }: { key?: React.Key; project: Project; index
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// MobileProjectCard — clean vertical card for touch devices
+// ─────────────────────────────────────────────────────────────────────────────
+function MobileProjectCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="neo-flat rounded-[32px] md:rounded-[40px] overflow-hidden flex flex-col"
+    >
+      {/* Image Header */}
+      <div className="relative h-56 sm:h-72 overflow-hidden w-full neo-concave rounded-t-[32px] md:rounded-t-[40px]">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="absolute inset-0 w-full h-full object-cover scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-black/20 to-transparent" />
+        <div className="absolute top-4 right-4 font-display text-white/[0.15] text-[4rem] font-black leading-none pointer-events-none select-none">
+          {String(index + 1).padStart(2, '0')}
+        </div>
+      </div>
+      
+      {/* Text Body */}
+      <div className="p-6 md:p-10 flex flex-col space-y-4">
+        <span className="inline-flex items-center font-mono text-[9px] sm:text-[10px] text-accent uppercase tracking-widest bg-accent/10 py-1 px-3 rounded-full w-max">
+          {project.category}
+        </span>
+        <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-text uppercase tracking-tight leading-[1.1]">
+          {project.title}
+        </h3>
+        <p className="text-text-muted text-sm md:text-base leading-relaxed mb-2">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-1.5 pt-2">
+          {project.tech.split(', ').map((tag) => (
+            <span
+              key={tag}
+              className="font-mono text-[9px] md:text-[10px] text-accent uppercase tracking-wider border border-accent/25 bg-accent/5 px-2 py-0.5 rounded"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-6">
+          <a
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 min-h-[48px] neo-btn px-6 py-3.5 rounded-full font-display font-medium text-text flex items-center justify-center gap-2 hover:text-accent transition-colors"
+          >
+            <span>Live Site</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="min-h-[48px] px-6 py-3.5 neo-convex rounded-full flex items-center justify-center text-text-muted hover:text-accent transition-colors"
+          >
+             <span className="sm:hidden font-display mr-2">Source Code</span>
+            <Github className="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Main Projects component
 // ─────────────────────────────────────────────────────────────────────────────
 export function Projects() {
@@ -367,10 +442,12 @@ export function Projects() {
   const shouldReduce = useReducedMotion() ?? false;
 
   // useScroll over the full tall container; progress 0→1 maps to entire scroll
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress: rawScrollProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
   });
+  
+  const scrollYProgress = useSpring(rawScrollProgress, { damping: 30, stiffness: 100, mass: 0.5 });
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [isGrid, setIsGrid] = useState(false);
@@ -402,8 +479,26 @@ export function Projects() {
 
   return (
     <section id="projects" className="relative">
-      {/* ── Tall scroll driver ── */}
-      <div ref={containerRef} style={{ height: `${TOTAL_VH}vh` }}>
+      
+      {/* ── MOBILE VERTICAL STACK (Hide on Desktop) ── */}
+      <div className="block lg:hidden py-24 px-6 md:px-12 max-w-2xl mx-auto space-y-12">
+        <div className="space-y-4 mb-4">
+          <p className="font-mono text-[10px] sm:text-xs text-accent uppercase tracking-widest mb-0.5">
+            Full Portfolio
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-text leading-none uppercase">
+            All Projects
+          </h2>
+        </div>
+        <div className="flex flex-col space-y-8 md:space-y-12">
+          {projects.map((project, i) => (
+            <MobileProjectCard key={project.id} project={project} index={i} />
+          ))}
+        </div>
+      </div>
+
+      {/* ── Tall scroll driver FOR DESKTOP ── */}
+      <div ref={containerRef} style={{ height: `${TOTAL_VH}vh` }} className="hidden lg:block">
 
         {/* ── Sticky viewport ── */}
         <div className="sticky top-0 h-screen overflow-hidden bg-bg">

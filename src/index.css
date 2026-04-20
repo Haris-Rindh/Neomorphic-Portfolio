@@ -63,7 +63,7 @@
 
   /* Interactive variations */
   .neo-btn {
-    @apply shadow-neo-convex transition-all duration-200 active:shadow-neo-concave active:scale-95;
+    @apply shadow-neo-convex transition-all duration-200 active:shadow-neo-concave active:scale-95 will-change-transform;
     background: linear-gradient(145deg, #f0f5fd, #caced4);
   }
 

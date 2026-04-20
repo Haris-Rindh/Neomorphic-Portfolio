@@ -33,23 +33,23 @@ const skillCategories = [
 ];
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring', damping: 18, stiffness: 80 } }
 };
 
 export function Skills() {
   return (
-    <section id="skills" className="py-32 px-6 md:px-12 w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-20 relative overflow-hidden">
+    <section id="skills" className="py-20 lg:py-32 px-6 md:px-12 w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-20 relative">
       
       {/* Background Decor */}
-      <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500/5 blur-[80px] rounded-full pointer-events-none" />
 
       {/* Sticky Left Hemisphere */}
       <div className="w-full lg:w-2/5">
-        <div className="sticky top-32 flex flex-col space-y-8">
+        <div className="lg:sticky lg:top-[30vh] flex flex-col space-y-8 pb-12 lg:pb-0 z-20">
           <div className="flex flex-col space-y-4">
              <span className="text-accent font-mono text-xs uppercase tracking-widest bg-white/60 px-4 py-1.5 rounded-full w-max shadow-neo-flat-sm border border-white/20">Technical Prowess</span>
-             <h2 className="text-5xl md:text-7xl font-display font-medium text-text leading-[0.9] uppercase">
+             <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-display font-medium text-text leading-[0.9] uppercase">
                 <TextReveal text="TECHNICAL <br/> ARSENAL" />
              </h2>
           </div>
@@ -74,7 +74,7 @@ export function Skills() {
             whileInView="visible"
             viewport={{ once: false, margin: "-50px" }}
             transition={{ staggerChildren: 0.08, delayChildren: 0.1 }}
-            className="p-10 md:p-14 neo-flat rounded-[48px] flex flex-col space-y-10 relative overflow-hidden group border border-white/10"
+            className="p-6 lg:p-14 neo-flat rounded-[32px] lg:rounded-[48px] flex flex-col space-y-8 lg:space-y-10 relative overflow-hidden group border border-white/10"
           >
             {/* Animated accent glow */}
             <div className="absolute -top-16 -right-16 w-48 h-48 bg-accent/5 blur-[60px] rounded-full pointer-events-none group-hover:bg-accent/15 transition-all duration-700 group-hover:scale-150" />
@@ -97,9 +97,9 @@ export function Skills() {
                   variants={itemVariants}
                   key={skill.name} 
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="neo-btn p-5 rounded-[24px] flex flex-col space-y-2 cursor-pointer group/pill border border-transparent hover:border-accent/20 transition-all duration-300"
+                  className="neo-btn p-4 md:p-5 rounded-[20px] md:rounded-[24px] flex flex-col space-y-2 cursor-pointer group/pill border border-transparent hover:border-accent/20 transition-all duration-300"
                 >
-                  <span className="font-sans font-bold text-text text-sm group-hover/pill:text-accent transition-colors leading-tight">{skill.name}</span>
+                  <span className="font-sans font-bold text-text text-xs sm:text-sm group-hover/pill:text-accent transition-colors leading-tight">{skill.name}</span>
                   <div className="flex items-center justify-between">
                      <span className="font-mono text-[9px] text-text-muted uppercase tracking-wider">{skill.level}</span>
                      <Rocket size={10} className="text-accent opacity-0 group-hover/pill:opacity-100 transition-opacity" />

@@ -11,18 +11,18 @@ const stats = [
 
 export function About() {
   return (
-    <section id="about" className="py-32 bg-bg relative overflow-hidden">
+    <section id="about" className="py-20 lg:py-32 bg-bg relative overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute top-[20%] right-[-5%] w-[30%] h-[30%] bg-accent/5 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-[20%] right-[-5%] w-[30%] h-[30%] bg-accent/5 blur-[60px] rounded-full pointer-events-none" />
       
       <div className="px-6 md:px-12 w-full max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-20 items-center">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
           
           {/* Left: Bio Story */}
           <div className="w-full lg:w-3/5 space-y-10">
             <div className="flex flex-col space-y-4">
               <span className="text-accent font-mono text-xs uppercase tracking-widest bg-accent/10 py-1.5 px-4 rounded-full w-max shadow-neo-flat-sm border border-white/20">The Visionary</span>
-              <h2 className="text-5xl md:text-7xl font-display font-medium text-text leading-[0.9] uppercase">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-medium text-text leading-[0.9] uppercase">
                 <TextReveal text="THE DEVELOPER <br/>BEHIND THE CODE" />
               </h2>
             </div>
@@ -53,9 +53,9 @@ export function About() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: false }}
                   transition={{ delay: idx * 0.1, duration: 0.5 }}
-                  className="neo-flat p-8 rounded-[40px] flex flex-col items-center justify-center text-center group hover:neo-concave transition-all duration-300 pointer-events-none"
+                  className="neo-flat p-6 md:p-8 rounded-[32px] md:rounded-[40px] flex flex-col items-center justify-center text-center group hover:neo-concave transition-all duration-300 pointer-events-none"
                 >
-                  <span className="text-4xl md:text-5xl font-display font-bold text-accent mb-2 group-hover:scale-110 transition-transform duration-500">{stat.value}</span>
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-accent mb-2 group-hover:scale-110 transition-transform duration-500">{stat.value}</span>
                   <span className="font-mono text-[10px] text-text-muted uppercase tracking-widest leading-tight">{stat.label}</span>
                 </motion.div>
               ))}

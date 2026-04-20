@@ -5,13 +5,20 @@ export function CustomCursor() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 20, stiffness: 200, mass: 0.5 };
+  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
   const [isHovered, setIsHovered] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    const checkTouch = () => {
+      setIsTouchDevice(window.matchMedia('(hover: none) or (pointer: coarse)').matches);
+    };
+    checkTouch();
+    window.addEventListener('resize', checkTouch);
+    
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -36,15 +43,18 @@ export function CustomCursor() {
     window.addEventListener('mouseover', handleMouseOver);
 
     return () => {
+      window.removeEventListener('resize', checkTouch);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
     };
   }, [mouseX, mouseY]);
 
+  if (isTouchDevice) return null;
+
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-accent rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 w-4 h-4 bg-accent/80 rounded-full pointer-events-none z-[9999]"
         style={{
           x: cursorX,
           y: cursorY,

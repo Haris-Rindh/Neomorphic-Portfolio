@@ -35,9 +35,9 @@ const steps = [
 
 export function Process() {
   return (
-    <section id="process" className="py-24 px-6 md:px-12">
+    <section id="process" className="py-16 md:py-24 px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 space-y-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 space-y-4">
           <div className="space-y-4">
             <span className="text-accent font-mono text-xs uppercase tracking-widest bg-accent/10 py-1 px-3 rounded-full">Methodology</span>
             <h2 className="text-4xl md:text-6xl font-display font-medium text-text">SYSTEM <br />ARCHITECT</h2>
@@ -55,9 +55,9 @@ export function Process() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group p-8 neo-flat rounded-3xl hover:neo-convex transition-all duration-500 flex flex-col h-full"
+              className="group p-6 lg:p-8 neo-flat rounded-[24px] lg:rounded-3xl hover:neo-convex transition-all duration-500 flex flex-col h-full"
             >
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between mb-6 lg:mb-8">
                 <span className="text-4xl font-display font-bold text-dark-shadow/30 group-hover:text-accent/40 transition-colors uppercase italic">{step.id}</span>
                 <div className="w-10 h-10 neo-concave rounded-full flex items-center justify-center shadow-glass">
                   <step.icon className="text-accent w-5 h-5" />
