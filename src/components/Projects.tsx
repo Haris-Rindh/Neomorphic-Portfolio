@@ -6,7 +6,6 @@ import {
   useTransform,
   useMotionValueEvent,
   useReducedMotion,
-  useSpring,
   type MotionValue,
 } from 'motion/react';
 import { ArrowUpRight, Github } from 'lucide-react';
@@ -212,6 +211,7 @@ function SpotlightCard({
         rotate: reduced ? rotateReduced : rotateFull,
         pointerEvents: pointerEv,
         zIndex,
+        willChange: 'transform, opacity',
       }}
     >
       <div className="w-full max-w-6xl flex flex-col lg:flex-row h-auto min-h-[55vh] lg:h-[70vh] lg:max-h-[540px] neo-flat rounded-[32px] md:rounded-[36px] overflow-hidden group relative shadow-neo-elevated items-stretch">
@@ -447,7 +447,9 @@ export function Projects() {
     offset: ['start start', 'end start'],
   });
   
-  const scrollYProgress = useSpring(rawScrollProgress, { damping: 30, stiffness: 100, mass: 0.5 });
+  // Use raw scroll value directly — springs add 200-400ms lag to scroll-driven animations.
+  // For card stack transforms, direct values feel immediately responsive.
+  const scrollYProgress = rawScrollProgress;
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [isGrid, setIsGrid] = useState(false);
@@ -552,7 +554,7 @@ export function Projects() {
             )}
           </div>
 
-          {/* ══ Side progress bar indicators ══ */}
+          {/* ══ Side progress bar indicators + scroll hint ══ */}
           <AnimatePresence>
             {!isGrid && (
               <motion.div
@@ -560,15 +562,15 @@ export function Projects() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 12 }}
                 transition={{ duration: 0.35 }}
-                className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-[60] flex flex-col items-center gap-1.5"
+                className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-[60] flex flex-col items-center gap-2"
               >
                 {projects.map((_, i) => (
                   <motion.div
                     key={i}
                     className="rounded-full"
                     animate={{
-                      width: 3,
-                      height: i === activeIndex ? 30 : i < activeIndex ? 8 : 6,
+                      width: 4,
+                      height: i === activeIndex ? 32 : i < activeIndex ? 10 : 6,
                       backgroundColor:
                         i === activeIndex
                           ? 'rgb(49,130,206)'
@@ -579,6 +581,16 @@ export function Projects() {
                     transition={{ duration: 0.4, ease: CUSTOM_EASE }}
                   />
                 ))}
+                {/* Scroll hint beneath dots */}
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.5 }}
+                  transition={{ delay: 0.8 }}
+                  className="font-mono text-[8px] text-text-muted uppercase tracking-widest mt-3 rotate-90 origin-center whitespace-nowrap"
+                  style={{ writingMode: 'vertical-rl' }}
+                >
+                  Scroll
+                </motion.p>
               </motion.div>
             )}
           </AnimatePresence>

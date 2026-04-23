@@ -23,9 +23,25 @@
 }
 
 @layer base {
+  /* NOTE: Do NOT add scroll-behavior:smooth here — Lenis handles scroll smoothing.
+     Having both causes double-smoothing which creates scroll lag and jitter. */
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* CRITICAL: overflow-x on html (not just body) prevents any element from
+       stretching the root layout viewport. Without this, mobile browsers zoom
+       out to fit overflowing content, causing the zoomed-out + left-aligned bug. */
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
   body {
-    @apply bg-bg text-text antialiased overflow-x-hidden;
+    @apply bg-bg text-text antialiased;
     font-family: var(--font-sans);
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    width: 100%;
   }
 
   h1, h2, h3, h4, .font-display {
@@ -35,6 +51,21 @@
   
   .font-mono {
     font-family: var(--font-mono);
+  }
+
+  /* Promote scroll-animated elements to their own compositor layer */
+  [data-scroll-animated] {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'motion/react';
 import { cn } from '../lib/utils';
 
@@ -8,57 +8,62 @@ interface TextRevealProps {
   delay?: number;
 }
 
-export function TextReveal({ text, className, delay = 0 }: TextRevealProps) {
-  const words = text.split(' ');
+const container = {
+  hidden:  { opacity: 0 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: delay },
+  }),
+};
 
-  const container = {
-    hidden: { opacity: 0 },
-    visible: (i = 1) => ({
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: delay * i },
-    }),
-  };
+const child = {
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotate: 0,
+    transition: { type: 'spring', damping: 22, stiffness: 120 },
+  },
+  hidden: {
+    opacity: 0,
+    y: 40,
+    rotate: 10,
+    transition: { type: 'spring', damping: 22, stiffness: 120 },
+  },
+};
 
-  const child = {
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotate: 0,
-      transition: {
-        type: 'spring',
-        damping: 20,
-        stiffness: 100,
-      },
-    },
-    hidden: {
-      opacity: 0,
-      y: 50,
-      rotate: 15,
-      transition: {
-        type: 'spring',
-        damping: 20,
-        stiffness: 100,
-      },
-    },
-  };
+export const TextReveal = memo(function TextReveal({ text, className, delay = 0 }: TextRevealProps) {
+  // Split by <br/> first (supports line breaks), then by spaces for word animation
+  const segments = text.split('<br/>');
 
   return (
     <motion.div
+      custom={delay}
       variants={container}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      className={cn("flex flex-wrap overflow-hidden", className)}
+      // once:true is critical for performance — avoids running animation on every reverse scroll
+      viewport={{ once: true, margin: '-80px' }}
+      className={cn('flex flex-col overflow-hidden', className)}
     >
-      {words.map((word, index) => (
-        <motion.span
-          variants={child}
-          key={index}
-          className="mr-2 mb-2 inline-block origin-bottom"
-        >
-          {word === '<br/>' ? <br /> : word}
-        </motion.span>
+      {segments.map((segment, si) => (
+        <span key={si} className="flex flex-wrap">
+          {segment
+            .split(' ')
+            .filter(Boolean)
+            .map((word, wi) => (
+              <motion.span
+                variants={child}
+                key={`${si}-${wi}`}
+                className="mr-2 mb-1 inline-block origin-bottom"
+                // Promote each word to its own layer for GPU compositing
+                style={{ willChange: 'transform, opacity' }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          {si < segments.length - 1 && <br />}
+        </span>
       ))}
     </motion.div>
   );
-}
+});
