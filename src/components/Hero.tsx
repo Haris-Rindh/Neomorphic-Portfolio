@@ -70,8 +70,8 @@ export function Hero() {
 
             {/* H1 */}
             <h1 className="flex flex-col text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-medium leading-[0.9] text-text tracking-tight">
-              <span><TextReveal text="HARIS" /></span>
-              <span className="text-gradient"><TextReveal text="RINDH." delay={0.2} /></span>
+              <div><TextReveal text="HARIS" /></div>
+              <div className="text-gradient"><TextReveal text="RINDH." delay={0.2} /></div>
             </h1>
 
             {/* Typewriter */}
