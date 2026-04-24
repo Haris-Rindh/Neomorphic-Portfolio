@@ -1,5 +1,5 @@
-import React, { useRef, useCallback } from 'react';
-import { motion, useMotionValue, useSpring } from 'motion/react';
+import React, { useRef, useState } from 'react';
+import { motion } from 'motion/react';
 
 interface MagneticProps {
   children: React.ReactElement;
@@ -8,31 +8,28 @@ interface MagneticProps {
 
 export function Magnetic({ children, strength = 0.5 }: MagneticProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  // Use motion values + spring instead of useState — no React re-renders on mouse move
-  const rawX = useMotionValue(0);
-  const rawY = useMotionValue(0);
-  const x = useSpring(rawX, { stiffness: 200, damping: 20, mass: 0.1 });
-  const y = useSpring(rawY, { stiffness: 200, damping: 20, mass: 0.1 });
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+  const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return;
+    const { clientX, clientY } = e;
     const { left, top, width, height } = ref.current.getBoundingClientRect();
-    rawX.set((e.clientX - (left + width / 2)) * strength);
-    rawY.set((e.clientY - (top + height / 2)) * strength);
-  }, [rawX, rawY, strength]);
+    const x = (clientX - (left + width / 2)) * strength;
+    const y = (clientY - (top + height / 2)) * strength;
+    setPosition({ x, y });
+  };
 
-  const handleMouseLeave = useCallback(() => {
-    rawX.set(0);
-    rawY.set(0);
-  }, [rawX, rawY]);
+  const handleMouseLeave = () => {
+    setPosition({ x: 0, y: 0 });
+  };
 
   return (
     <motion.div
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ x, y }}
+      animate={{ x: position.x, y: position.y }}
+      transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
     >
       {children}
     </motion.div>

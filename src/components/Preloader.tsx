@@ -77,11 +77,11 @@ interface PhaseCfg {
 }
 
 const PHASES: Record<Phase, PhaseCfg> = {
-  assemble_haris: { dur: 110, next: 'hold_haris',    progFrom:  0, progTo:  40, label: 'haris',      status: 'placing particles'  },
-  hold_haris:     { dur:  65, next: 'burst',          progFrom: 40, progTo:  42, label: 'haris',      status: 'formation locked'   },
-  burst:          { dur:  55, next: 'scatter',        progFrom: 42, progTo:  62, label: 'exploding',  status: 'burst!'             },
-  scatter:        { dur:  30, next: 'assemble_rindh', progFrom: 62, progTo:  68, label: 'in transit', status: 'reforming'          },
-  assemble_rindh: { dur: 130, next: 'done',           progFrom: 68, progTo: 100, label: 'rindh',      status: 'placing particles'  },
+  assemble_haris: { dur: 50, next: 'hold_haris',    progFrom:  0, progTo:  40, label: 'haris',      status: 'placing particles'  },
+  hold_haris:     { dur: 25, next: 'burst',         progFrom: 40, progTo:  42, label: 'haris',      status: 'formation locked'   },
+  burst:          { dur: 35, next: 'scatter',       progFrom: 42, progTo:  62, label: 'exploding',  status: 'burst!'             },
+  scatter:        { dur: 20, next: 'assemble_rindh',progFrom: 62, progTo:  68, label: 'in transit', status: 'reforming'          },
+  assemble_rindh: { dur: 60, next: 'done',          progFrom: 68, progTo: 100, label: 'rindh',      status: 'placing particles'  },
   done:           { dur: Infinity, next: 'done',      progFrom: 100, progTo: 100, label: 'rindh',     status: 'ready'              },
 };
 
@@ -272,7 +272,7 @@ function ParticleCanvas({ onProgressChange, onStatusChange, onDone }: ParticleCa
         }
 
       } else if (s.phase === 'assemble_rindh') {
-        s.parts.forEach(p => { p.color = p.rc; p.spring(p.rx, p.ry, 0.10, 0.76); p.draw(ctx); });
+        s.parts.forEach(p => { p.color = p.rc; p.spring(p.rx, p.ry, 0.15, 0.70); p.draw(ctx); });
         if (s.frame >= cfg.dur) {
           s.phase = 'done'; s.frame = 0;
           onProgressChange(100);
@@ -340,21 +340,14 @@ export function Preloader({ onComplete }: PreloaderProps) {
     /* Exit transition after a short hold */
     setTimeout(() => {
       setExitPhase(true);
-      setTimeout(onComplete, 700);
-    }, 900);
+      setTimeout(onComplete, 400);
+    }, 400);
   }, [onComplete]);
 
   return (
     <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-bg transition-all duration-700 ease-out"
       style={{
-        position:      'fixed',
-        inset:         0,
-        zIndex:        9999,
-        display:       'flex',
-        alignItems:    'center',
-        justifyContent:'center',
-        background:    '#D4DBE8',
-        transition:    'opacity 0.7s ease, transform 0.7s ease',
         opacity:        exitPhase ? 0 : 1,
         transform:      exitPhase ? 'scale(1.04)' : 'scale(1)',
         pointerEvents:  exitPhase ? 'none' : 'all',
@@ -362,31 +355,11 @@ export function Preloader({ onComplete }: PreloaderProps) {
     >
       {/* ── Outer neumorphic card ── */}
       <div
-        style={{
-          background:    '#D4DBE8',
-          borderRadius:  '24px',
-          padding:       '40px 48px 36px',
-          boxShadow:     '20px 20px 40px #a3b1c6, -20px -20px 40px #ffffff',
-          display:       'flex',
-          flexDirection: 'column',
-          alignItems:    'center',
-          gap:           '28px',
-          minWidth:      '340px',
-        }}
+        className="bg-bg rounded-[24px] px-12 py-10 shadow-neo-elevated flex flex-col items-center gap-7 w-[min(340px,90vw)] max-w-[95vw]"
       >
         {/* ── Inner concave display panel ── */}
         <div
-          style={{
-            borderRadius:   '16px',
-            padding:        '24px 28px',
-            boxShadow:      'inset 6px 6px 12px #a3b1c6, inset -6px -6px 12px #ffffff',
-            background:     'linear-gradient(145deg, #caced4, #f0f5fd)',
-            display:        'flex',
-            alignItems:     'center',
-            justifyContent: 'center',
-            width:          '100%',
-            overflow:       'hidden',
-          }}
+          className="rounded-2xl px-7 py-6 shadow-neo-concave neo-concave flex items-center justify-center w-full overflow-hidden"
         >
           <ParticleCanvas
             onProgressChange={setProgress}
@@ -396,31 +369,12 @@ export function Preloader({ onComplete }: PreloaderProps) {
         </div>
 
         {/* ── Phase label ── */}
-        <p
-          style={{
-            fontFamily:     "'JetBrains Mono', monospace",
-            fontSize:       '13px',
-            letterSpacing:  '0.3em',
-            color:          '#4A5568',
-            margin:         0,
-            textTransform:  'lowercase',
-            transition:     'color 0.4s',
-          }}
-        >
+        <p className="font-mono text-sm tracking-[0.3em] text-text-muted m-0 lowercase transition-colors duration-400">
           {phaseLabel}
         </p>
 
         {/* ── Progress bar track ── */}
-        <div
-          style={{
-            width:        '100%',
-            height:       '6px',
-            borderRadius: '100px',
-            boxShadow:    'inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px #ffffff',
-            background:   'linear-gradient(145deg, #caced4, #f0f5fd)',
-            overflow:     'hidden',
-          }}
-        >
+        <div className="w-full h-1.5 rounded-full shadow-neo-concave neo-concave overflow-hidden">
           <div
             style={{
               height:     '100%',
@@ -434,17 +388,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
         </div>
 
         {/* ── Status row ── */}
-        <div
-          style={{
-            display:     'flex',
-            alignItems:  'center',
-            gap:         '8px',
-            fontFamily:  "'JetBrains Mono', monospace",
-            fontSize:    '11px',
-            color:       '#4A5568',
-            letterSpacing:'0.15em',
-          }}
-        >
+        <div className="flex items-center gap-2 font-mono text-xs text-text-muted tracking-[0.15em]">
           {/* Animated pulse dot */}
           <span
             style={{

@@ -10,6 +10,9 @@
   --color-light-shadow: #ffffff;
   --color-dark-shadow: #a3b1c6;
   
+  --color-grad-start: #f0f5fd;
+  --color-grad-end: #caced4;
+  
   --shadow-neo-flat: 8px 8px 16px var(--color-dark-shadow), -8px -8px 16px var(--color-light-shadow);
   --shadow-neo-flat-sm: 4px 4px 8px var(--color-dark-shadow), -4px -4px 8px var(--color-light-shadow);
   --shadow-neo-convex: 8px 8px 16px var(--color-dark-shadow), -8px -8px 16px var(--color-light-shadow);
@@ -22,26 +25,23 @@
   --font-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
 }
 
+
 @layer base {
-  /* NOTE: Do NOT add scroll-behavior:smooth here — Lenis handles scroll smoothing.
-     Having both causes double-smoothing which creates scroll lag and jitter. */
-  html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    /* CRITICAL: overflow-x on html (not just body) prevents any element from
-       stretching the root layout viewport. Without this, mobile browsers zoom
-       out to fit overflowing content, causing the zoomed-out + left-aligned bug. */
-    overflow-x: hidden;
-    overflow-y: auto;
+  html.dark {
+    --color-bg: #1A202C;
+    --color-text: #E2E8F0;
+    --color-text-muted: #A0AEC0;
+    --color-accent: #63B3ED;
+    --color-light-shadow: #242c3d;
+    --color-dark-shadow: #10141b;
+    --color-grad-start: #1e2533;
+    --color-grad-end: #161b25;
   }
 
+  
   body {
-    @apply bg-bg text-text antialiased;
+    @apply bg-bg text-text antialiased overflow-x-hidden;
     font-family: var(--font-sans);
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: relative;
-    width: 100%;
   }
 
   h1, h2, h3, h4, .font-display {
@@ -51,21 +51,6 @@
   
   .font-mono {
     font-family: var(--font-mono);
-  }
-
-  /* Promote scroll-animated elements to their own compositor layer */
-  [data-scroll-animated] {
-    will-change: transform, opacity;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
   }
 }
 
@@ -84,18 +69,18 @@
   
   .neo-convex {
     @apply shadow-neo-convex transition-shadow duration-300;
-    background: linear-gradient(145deg, #f0f5fd, #caced4);
+    background: linear-gradient(145deg, var(--color-grad-start), var(--color-grad-end));
   }
   
   .neo-concave {
     @apply shadow-neo-concave transition-shadow duration-300;
-    background: linear-gradient(145deg, #caced4, #f0f5fd);
+    background: linear-gradient(145deg, var(--color-grad-end), var(--color-grad-start));
   }
 
   /* Interactive variations */
   .neo-btn {
     @apply shadow-neo-convex transition-all duration-200 active:shadow-neo-concave active:scale-95 will-change-transform;
-    background: linear-gradient(145deg, #f0f5fd, #caced4);
+    background: linear-gradient(145deg, var(--color-grad-start), var(--color-grad-end));
   }
 
   .text-glow {

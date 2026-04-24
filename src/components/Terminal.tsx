@@ -210,7 +210,7 @@ export function Terminal({ isOpen, onClose }: TerminalProps) {
                 </div>
 
                 {/* Title */}
-                <span className="font-mono text-xs text-text/60 uppercase tracking-widest font-semibold flex-1 text-center">
+                <span className="font-mono text-xs text-text/80 uppercase tracking-widest font-semibold flex-1 text-center">
                   Startup CLI — Haris.dev
                 </span>
 
@@ -226,7 +226,7 @@ export function Terminal({ isOpen, onClose }: TerminalProps) {
 
               {/* ── Close hint strip ── */}
               <div className="flex items-center gap-3 px-5 py-1.5 bg-accent/5 border-b border-white/10 shrink-0">
-                <span className="font-mono text-[10px] text-text/40 uppercase tracking-widest">
+                <span className="font-mono text-[11px] text-text/70 uppercase tracking-widest">
                   Type <span className="text-accent font-semibold">exit</span> or press{' '}
                   <span className="text-accent font-semibold">Esc</span> to close
                 </span>
