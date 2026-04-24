@@ -65,7 +65,7 @@ export function About() {
                  I am <span className="text-text font-medium underline decoration-accent/30 underline-offset-4">Haris Rindh</span>, a dedicated MERN Stack Specialist with a passion for designing and developing robust, scalable, and visually compelling web applications. I bridge the gap between back-end infrastructure and front-end user experience.
                </p>
                <p className="text-lg text-text-muted leading-relaxed font-light">
-                 With a deep understanding of Neumorphic and Glassmorphic design principles, I aim to craft digital experiences that are not just functional, but profoundly engaging. Every project is an opportunity to solve a complex problem with an elegant solution.
+                 With a deep understanding of design principles and layout, I aim to craft digital experiences that are not just functional, but profoundly engaging. Every project is an opportunity to solve a complex problem with an elegant solution.
                </p>
             </motion.div>
           </div>

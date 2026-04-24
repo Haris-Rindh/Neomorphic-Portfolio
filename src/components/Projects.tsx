@@ -27,7 +27,7 @@ type Project = {
 
 const projects: Project[] = [
   {
-    id: 'nexus',
+    id: 'nexusai',
     title: 'Nexus AI',
     category: 'Enterprise SaaS Platform',
     description:
@@ -36,6 +36,17 @@ const projects: Project[] = [
     liveLink: 'https://nexus-ai-mocha-phi.vercel.app/',
     github: 'https://github.com/Haris-Rindh/NexusAI',
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200',
+  },
+  {
+    id: 'nexus',
+    title: 'NEXUS',
+    category: 'SaaS Platform',
+    description:
+      'A comprehensive Investor & Entrepreneur Collaboration platform featuring real-time WebRTC video calling, secure document handling, and integrated Stripe payments.',
+    tech: 'MERN Stack, Tailwind, Socket.io, WebRTC',
+    liveLink: 'https://nexus-jet-eight-72.vercel.app/',
+    github: 'https://github.com/Haris-Rindh/Nexus.git',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200', 
   },
   {
     id: 'booksphere',
@@ -129,6 +140,9 @@ const ACCENT_COLORS = [
   'rgba(246,173,85,0.12)',
   'rgba(252,129,74,0.12)',
 ];
+
+// Map colors dynamically so they loop perfectly, matching projects.length
+const PROJECT_COLORS = projects.map((_, i) => ACCENT_COLORS[i % ACCENT_COLORS.length]);
 
 // Each project gets PER_PROJECT_VH of vertical scroll "room"
 const PER_PROJECT_VH = 90;
@@ -448,7 +462,7 @@ export function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isGrid, setIsGrid] = useState(false);
 
-  // Per-project background accent colour that cross-fades as user scrolls
+  // Per-project background accent colour mapped to the exact length of the projects array
   const bgColor = useTransform(
     scrollYProgress,
     [
@@ -459,8 +473,8 @@ export function Projects() {
     ],
     [
       'rgba(49,130,206,0)',
-      ...ACCENT_COLORS,
-      ACCENT_COLORS[ACCENT_COLORS.length - 1],
+      ...PROJECT_COLORS,
+      PROJECT_COLORS[PROJECT_COLORS.length - 1], // Matches grid start with last project color
       'rgba(252,129,74,0)',
     ]
   );

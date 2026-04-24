@@ -5,28 +5,28 @@ import { TextReveal } from './TextReveal';
 
 const experiences = [
   {
-    role: "Full Stack Developer",
-    company: "Freelance",
+    role: "Freelance Web Developer",
+    company: "Self-Employed",
     location: "Remote / Global",
-    period: "2023 — Present",
-    description: "Architecting end-to-end MERN stack solutions. Specializing in high-performance dashboards, real-time collaboration tools, and immersive Neumorphic UI systems.",
-    highlights: ["SaaS Architecture", "AI Integration", "Premium UI/UX"]
+    period: "Present",
+    description: "Delivering end-to-end full-stack web development services for various clients. Specializing in building scalable, responsive, and highly optimized modern web applications.",
+    highlights: ["Full-Stack Dev", "Client Relations", "Modern Web"]
   },
   {
-    role: "MERN Stack Specialist",
-    company: "Nexus Digital Platform",
-    location: "Lahore, PK",
-    period: "2022 — 2023",
-    description: "Developed and maintained large-scale web applications. Focused on optimizing database performance and building responsive, user-centric frontends.",
-    highlights: ["API Optimization", "State Management", "Responsive Design"]
+    role: "Software Engineering Intern",
+    company: "DevelopersHub Corporation",
+    location: "Remote",
+    period: "2026 (6 Weeks)",
+    description: "Completed an intensive 6-week internship program. Spearheaded the development of a fully functional E-commerce platform and contributed core features to 'Nexus' — a comprehensive collaboration platform for Investors and Entrepreneurs.",
+    highlights: ["E-commerce", "SaaS Development", "Team Collaboration"]
   },
   {
-    role: "Frontend Specialist",
-    company: "Tech Solutions Agency",
-    location: "Karachi, PK",
-    period: "2021 — 2022",
-    description: "Led the migration of legacy projects to modern React/Tailwind stacks. Standardized UI components and improved overall application accessibility.",
-    highlights: ["React Migration", "UI Kit Development", "Clean Code"]
+    role: "Web Developer",
+    company: "Umer Surveying (Local Client)",
+    location: "Remote",
+    period: "2024",
+    description: "Designed and engineered a professional corporate website for 'Umer Surveying', a specialized construction and surveying services company. Delivered a highly responsive, SEO-optimized landing experience to drive client acquisition.",
+    highlights: ["Corporate Website", "SEO Optimization", "UI/UX Design"]
   }
 ];
 

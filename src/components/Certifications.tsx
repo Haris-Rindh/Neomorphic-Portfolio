@@ -8,33 +8,25 @@ const certs = [
     id: 1,
     title: 'Meta Front-End Developer',
     issuer: 'Coursera / Meta',
-    date: '2023',
+    date: 'Jun 15, 2025',
     icon: Code2,
-    link: '#', // Replace with real credential link
+    link: 'https://drive.google.com/file/d/1Oqu4ciVLb1ACwRzXONNh8rrFUoZv0x-F/view?usp=sharing', // Replace with real credential link
   },
   {
     id: 2,
-    title: 'AWS Certified Solutions Architect',
-    issuer: 'Amazon Web Services',
-    date: '2024',
+    title: 'Full Stack Development',
+    issuer: 'DevelopersHub Corporation',
+    date: 'April 12th, 2026',
     icon: ShieldCheck,
-    link: '#',
+    link: 'https://drive.google.com/file/d/1DTdO0tkcgCDKrPBeURFt0TkOqfpx_ahi/view?usp=sharing',
   },
   {
     id: 3,
-    title: 'Google Data Analytics',
-    issuer: 'Google',
-    date: '2022',
+    title: 'Introduction to Networks',
+    issuer: 'Cisco',
+    date: 'Jul 04, 2025',
     icon: Award,
-    link: '#',
-  },
-  {
-    id: 4,
-    title: 'MongoDB Node.js Developer',
-    issuer: 'MongoDB University',
-    date: '2023',
-    icon: Database,
-    link: '#',
+    link: 'https://drive.google.com/file/d/19sEfmdwihUN9-SX3NTuW8XyhGRLLJ5Bc/view?usp=sharing',
   }
 ];
 
@@ -63,7 +55,7 @@ export function Certifications() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="flex flex-wrap justify-center gap-6 lg:gap-8">
           {certs.map((cert, idx) => (
             <motion.div
               key={cert.id}
@@ -71,7 +63,7 @@ export function Certifications() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className="relative neo-flat rounded-[28px] p-6 pt-12 flex flex-col items-center text-center group hover:shadow-neo-elevated transition-shadow duration-500"
+              className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-[400px] relative neo-flat rounded-[28px] p-6 pt-12 flex flex-col items-center text-center group hover:shadow-neo-elevated transition-shadow duration-500"
             >
               {/* Lanyard Hole Punch */}
               <div className="absolute top-4 left-1/2 -translate-x-1/2 w-14 h-3 rounded-full shadow-neo-concave bg-bg border border-dark-shadow/20" />
@@ -83,8 +75,9 @@ export function Certifications() {
                 <cert.icon size={28} className="relative z-10 group-hover:scale-110 transition-transform duration-500" />
               </div>
 
-              <div className="font-mono text-[11px] font-bold text-accent tracking-widest uppercase mb-3">
-                {cert.issuer} • {cert.date}
+              <div className="flex flex-col items-center gap-1 mb-3">
+                <span className="font-mono text-[11px] font-bold text-accent tracking-widest uppercase">{cert.issuer}</span>
+                <span className="font-mono text-[10px] text-text-muted tracking-widest uppercase">{cert.date}</span>
               </div>
               
               <h3 className="font-display text-xl font-bold text-text leading-tight mb-4 group-hover:text-accent transition-colors">

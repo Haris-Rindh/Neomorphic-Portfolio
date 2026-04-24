@@ -1,45 +1,63 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Database, Layout, Code2, Cpu, Globe, Rocket, Wrench } from 'lucide-react';
+import { Database, Layout, Code2, Cpu, Globe, Rocket, Wrench, Shield, Zap, Layers } from 'lucide-react';
 import { TextReveal } from './TextReveal';
 
 const skillCategories = [
   {
-    title: 'Frontend Mastery',
+    title: 'Frontend Architecture',
     icon: Layout,
-    description: 'Crafting immersive, high-performance user interfaces with modern frameworks.',
+    description: 'Engineering performant, accessible, and visually stunning web applications with a focus on UX.',
     color: 'text-accent',
     items: [
-      { name: 'React / Next.js', level: 'Expert' },
-      { name: 'TypeScript', level: 'Advanced' },
-      { name: 'Tailwind CSS', level: 'Advanced' },
+      { name: 'React / Next.js 14', level: 'Expert' },
+      { name: 'TypeScript', level: 'Expert' },
+      { name: 'Tailwind / SCSS', level: 'Expert' },
       { name: 'Framer Motion', level: 'Advanced' },
-      { name: 'Three.js / GSAP', level: 'Intermediate' },
+      { name: 'Three.js / WebGL', level: 'Intermediate' },
+      { name: 'State Management', level: 'Expert' },
     ]
   },
   {
-    title: 'Backend & DevOps',
+    title: 'Backend Ecosystem',
     icon: Database,
-    description: 'Building robust, scalable server-side systems and efficient databases.',
+    description: 'Designing scalable microservices and high-performance distributed system architectures.',
     color: 'text-accent',
     items: [
-      { name: 'Node.js & Express', level: 'Advanced' },
-      { name: 'MongoDB / PostgreSQL', level: 'Advanced' },
-      { name: 'Firebase / AWS', level: 'Intermediate' },
-      { name: 'Docker / CI/CD', level: 'Intermediate' },
-      { name: 'GraphQL / REST', level: 'Proficient' },
+      { name: 'Node.js / Bun', level: 'Expert' },
+      { name: 'PostgreSQL / Redis', level: 'Advanced' },
+      { name: 'GraphQL / gRPC', level: 'Advanced' },
+      { name: 'Go / Python', level: 'Intermediate' },
+      { name: 'Prisma / Drizzle', level: 'Expert' },
+      { name: 'System Design', level: 'Advanced' },
     ]
   },
   {
-    title: 'Tools & Workflow',
+    title: 'Cloud & Operations',
     icon: Wrench,
-    description: 'Streamlining development processes and ensuring version control integrity.',
+    description: 'Automating deployments and managing resilient, high-availability cloud infrastructure.',
     color: 'text-accent',
     items: [
-      { name: 'Git & GitHub', level: 'Advanced' },
-      { name: 'Docker / CI/CD', level: 'Intermediate' },
-      { name: 'Figma', level: 'Advanced' },
-      { name: 'Postman', level: 'Expert' },
+      { name: 'AWS / GCP', level: 'Advanced' },
+      { name: 'Docker / K8s', level: 'Intermediate' },
+      { name: 'Terraform / IaC', level: 'Intermediate' },
+      { name: 'CI/CD Pipelines', level: 'Advanced' },
+      { name: 'Linux / Bash', level: 'Advanced' },
+      { name: 'Unit/E2E Testing', level: 'Advanced' },
+    ]
+  },
+  {
+    title: 'Specialized Expertise',
+    icon: Shield,
+    description: 'Focusing on security, performance optimization, and modern AI integration.',
+    color: 'text-accent',
+    items: [
+      { name: 'Web Security', level: 'Advanced' },
+      { name: 'RAG / LLM Ops', level: 'Intermediate' },
+      { name: 'API Design', level: 'Expert' },
+      { name: 'Performance Auth', level: 'Advanced' },
+      { name: 'Vector DBs', level: 'Intermediate' },
+      { name: 'Edge Computing', level: 'Advanced' },
     ]
   }
 ];
@@ -73,9 +91,9 @@ export function Skills() {
           </p>
           
           <div className="flex gap-4 pt-4">
-             <div className="w-12 h-12 neo-convex rounded-full flex items-center justify-center text-accent"><Code2 size={20} /></div>
-             <div className="w-12 h-12 neo-convex rounded-full flex items-center justify-center text-accent"><Cpu size={20} /></div>
-             <div className="w-12 h-12 neo-convex rounded-full flex items-center justify-center text-accent"><Globe size={20} /></div>
+             <div className="w-12 h-12 neo-convex rounded-full flex items-center justify-center text-accent transition-transform hover:scale-110"><Code2 size={20} /></div>
+             <div className="w-12 h-12 neo-convex rounded-full flex items-center justify-center text-accent transition-transform hover:scale-110"><Cpu size={20} /></div>
+             <div className="w-12 h-12 neo-convex rounded-full flex items-center justify-center text-accent transition-transform hover:scale-110"><Globe size={20} /></div>
           </div>
         </div>
       </div>
@@ -117,7 +135,7 @@ export function Skills() {
                 >
                   <span className="font-sans font-bold text-text text-xs sm:text-sm group-hover/pill:text-accent transition-colors leading-tight">{skill.name}</span>
                   <div className="flex items-center justify-between">
-                     <span className="font-mono text-xs text-text-muted uppercase tracking-wider">{skill.level}</span>
+                     <span className="font-mono text-[10px] text-text-muted uppercase tracking-wider">{skill.level}</span>
                      <Rocket size={10} className="text-accent opacity-0 group-hover/pill:opacity-100 transition-opacity" />
                   </div>
                 </motion.div>

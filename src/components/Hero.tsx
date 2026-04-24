@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
-import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa'; // Removed unused FaFacebook
+import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import Typewriter from 'typewriter-effect';
 import { Magnetic } from './Magnetic';
 import { TextReveal } from './TextReveal';
@@ -37,10 +37,9 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
   const smoothProgress = useSpring(scrollYProgress, { damping: 30, stiffness: 100, mass: 0.5 });
 
-  const yOrb = useTransform(smoothProgress, [0, 1], [0, 200]);
-  const yCard1 = useTransform(smoothProgress, [0, 1], [0, -100]);
-  const yCard2 = useTransform(smoothProgress, [0, 1], [0, 150]);
-  const heroOpacity = useTransform(smoothProgress, [0.6, 1], [1, 0]);
+  const yOrb = useTransform(smoothProgress, [0, 1], [0, 120]);
+  const yCard1 = useTransform(smoothProgress, [0, 1], [0, -60]);
+  const yCard2 = useTransform(smoothProgress, [0, 1], [0, -30]);
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -51,13 +50,15 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={containerRef} id="home" className="relative min-h-[100svh] pt-24 px-6 md:px-12 flex items-center will-change-transform z-10 overflow-hidden">
+    <section ref={containerRef} id="home" className="relative min-h-[100svh] pt-24 px-6 md:px-12 flex items-center will-change-transform z-10">
       {/* Background Decor */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-accent/5 blur-[80px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent/5 blur-[80px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-accent/5 blur-[80px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent/5 blur-[80px] rounded-full pointer-events-none" />
+      </div>
 
-      {/* Main Wrapper that fades on scroll */}
-      <motion.div style={{ opacity: heroOpacity }} className="flex w-full max-w-7xl mx-auto flex-col lg:flex-row items-stretch justify-between relative z-10 gap-12 lg:gap-8">
+      {/* Main Wrapper */}
+      <div className="flex w-full max-w-7xl mx-auto flex-col lg:flex-row items-stretch justify-between relative z-10 gap-12 lg:gap-8">
 
         {/* Left Content */}
         <div className="flex-1 flex flex-col justify-center space-y-8 z-10">
@@ -187,7 +188,7 @@ export function Hero() {
             </motion.div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Scroll Down Indicator */}
       <motion.div

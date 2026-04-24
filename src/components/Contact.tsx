@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Mail, Linkedin, Github, MessageCircle, ArrowRight } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { TextReveal } from './TextReveal';
 
 export function Contact() {
@@ -101,7 +102,7 @@ export function Contact() {
                 >
                    <div className="flex items-center space-x-4">
                       <div className="w-10 h-10 neo-concave rounded-xl flex items-center justify-center text-green-500">
-                         <MessageCircle size={20} />
+                         <FaWhatsapp size={20} />  
                       </div>
                       <span className="font-sans font-bold text-text">WhatsApp</span>
                    </div>
