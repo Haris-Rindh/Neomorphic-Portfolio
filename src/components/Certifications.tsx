@@ -46,7 +46,7 @@ export function Certifications() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 space-y-6">
           <div className="space-y-4">
             <span className="text-accent font-mono text-xs uppercase tracking-widest bg-accent/10 py-1.5 px-4 rounded-full w-max shadow-neo-flat-sm border border-white/20">Accreditations</span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium text-text uppercase">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium text-text uppercase pt-4">
               <TextReveal text="VERIFIED <br/> EXPERTISE" />
             </h2>
           </div>

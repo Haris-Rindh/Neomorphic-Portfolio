@@ -14,7 +14,7 @@ export function Contact() {
         
         <div className="text-center space-y-6 mb-16">
           <span className="text-accent font-mono text-xs uppercase tracking-widest bg-accent/10 py-1.5 px-4 rounded-full w-max shadow-neo-flat-sm border border-white/20 mx-auto">Available for Hire</span>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-medium text-text leading-[0.8] uppercase max-w-4xl">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-medium text-text leading-[0.8] uppercase pt-4 max-w-4xl">
             <TextReveal text="READY TO BUILD <br/> THE FUTURE?" />
           </h2>
           <p className="text-lg text-text-muted font-light max-w-xl mx-auto pt-4 leading-relaxed px-4">

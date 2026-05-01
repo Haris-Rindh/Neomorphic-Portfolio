@@ -10,6 +10,10 @@ import {
   type MotionValue,
 } from 'motion/react';
 import { ArrowUpRight, Github } from 'lucide-react';
+import booksphere from '../assets/booksphere.png';
+import dentalWebsite from '../assets/dental_website.png';
+import rusticSpoon from '../assets/rustic_spoon.png';
+import skyline from '../assets/skyline.png';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Data
@@ -38,6 +42,17 @@ const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200',
   },
   {
+    id: 'booksphere',
+    title: 'Book Sphere',
+    category: 'Full-Stack Web App',
+    description:
+    'A dynamic library management application with cloud database integration and real-time collaborative updates.',
+    tech: 'React, Firebase, Async API',
+    liveLink: 'https://haris-rindh.github.io/Book-Sphere/',
+    github: 'https://github.com/Haris-Rindh/Book-Sphere',
+    image: booksphere,
+  },
+  {
     id: 'nexus',
     title: 'NEXUS',
     category: 'SaaS Platform',
@@ -47,17 +62,6 @@ const projects: Project[] = [
     liveLink: 'https://nexus-jet-eight-72.vercel.app/',
     github: 'https://github.com/Haris-Rindh/Nexus.git',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200', 
-  },
-  {
-    id: 'booksphere',
-    title: 'Book Sphere',
-    category: 'Full-Stack Web App',
-    description:
-      'A dynamic library management application with cloud database integration and real-time collaborative updates.',
-    tech: 'React, Firebase, Async API',
-    liveLink: 'https://haris-rindh.github.io/Book-Sphere/',
-    github: 'https://github.com/Haris-Rindh/Book-Sphere',
-    image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200',
   },
   {
     id: 'umer',
@@ -79,7 +83,7 @@ const projects: Project[] = [
     tech: 'React, Tailwind, Framer Motion',
     liveLink: 'https://skyline-apartments-two.vercel.app/',
     github: 'https://github.com/Haris-Rindh/Skyline-apartments.git',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200',
+    image: skyline,
   },
   {
     id: 'digital',
@@ -112,7 +116,7 @@ const projects: Project[] = [
     tech: 'HTML5, Bootstrap, Responsive',
     liveLink: 'https://zenith-dental-one.vercel.app/',
     github: 'https://github.com/Haris-Rindh/Zenith-dental.git',
-    image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1200',
+    image: dentalWebsite,
   },
   {
     id: 'urban',
@@ -123,7 +127,7 @@ const projects: Project[] = [
     tech: 'React, CSS Modules, Animation',
     liveLink: 'https://rustic-spoon-nu.vercel.app/',
     github: 'https://github.com/Haris-Rindh/rustic-spoon.git',
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200',
+    image: rusticSpoon,
   },
 ];
 
@@ -228,7 +232,7 @@ function SpotlightCard({
         zIndex,
       }}
     >
-      <div className="w-full max-w-6xl flex flex-col lg:flex-row h-auto min-h-[55vh] lg:h-[70vh] lg:max-h-[540px] neo-flat rounded-[32px] md:rounded-[36px] overflow-hidden group relative shadow-neo-elevated items-stretch">
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row h-auto min-h-[60vh] lg:h-[70vh] lg:max-h-[540px] neo-flat rounded-[32px] md:rounded-[36px] overflow-hidden group relative shadow-neo-elevated items-stretch">
         {/* ── Left: Text content ── */}
         <div className="flex-1 w-full lg:w-[58%] min-w-0 p-6 md:p-12 lg:p-14 flex flex-col justify-between z-10 shrink-1 gap-6">
           <div className="space-y-4 md:space-y-5">
