@@ -5,31 +5,31 @@ import { Cpu, Globe, Database, Layers } from 'lucide-react';
 const steps = [
   {
     id: '01',
-    title: 'Research & Strategy',
-    description: 'Deep dive into user psychology and market trends to define the technical roadmap.',
+    title: 'Understand & Plan',
+    description: 'Deep dive into user goals, scope requirements, and define the technical roadmap before writing a single line of code.',
     icon: Globe,
     tech: 'MARKET ANALYSIS / USER FLOWS'
   },
   {
     id: '02',
-    title: 'Precision Architecting',
-    description: 'Building robust backends with scalable Node.js and MongoDB for maximum efficiency and speed.',
+    title: 'Design the System',
+    description: 'Architect the database schema, API structure, and component hierarchy for a scalable, maintainable codebase.',
     icon: Cpu,
-    tech: 'NODE.JS / EXPRESS / DOCKER'
+    tech: 'NODE.JS / EXPRESS / MONGODB'
   },
   {
     id: '03',
-    title: 'Interactive Frontend',
-    description: 'Crafting fluid motion and pixel-perfect UI using Framer Motion and React.',
+    title: 'Build & Animate',
+    description: 'Craft fluid motion and pixel-perfect UI using React and Framer Motion, wired to a robust backend.',
     icon: Layers,
-    tech: 'REACT / VITE / MOTION'
+    tech: 'REACT / VITE / FRAMER MOTION'
   },
   {
     id: '04',
-    title: 'Deployment & Scaling',
-    description: 'Automated CI/CD pipelines and edge delivery to ensure global accessibility.',
+    title: 'Deploy & Monitor',
+    description: 'Ship via Vercel with CI/CD pipelines. Monitor performance and iterate based on real user feedback.',
     icon: Database,
-    tech: 'VERCEL / AWS / GITHUB ACTIONS'
+    tech: 'VERCEL / GITHUB ACTIONS'
   }
 ];
 
@@ -43,12 +43,12 @@ export function Process() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 space-y-4">
           <div className="space-y-4">
             <span className="text-accent font-mono text-xs uppercase tracking-widest bg-accent/10 py-1.5 px-4 rounded-full w-max shadow-neo-flat-sm border border-white/20">Methodology</span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium text-text">SYSTEM <br />ARCHITECT</h2>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-medium text-text">MY <br />PROCESS</h2>
           </div>
           <div className="max-w-sm neo-flat p-5 md:p-6 rounded-2xl md:rounded-3xl border border-white/20">
-            <p className="text-text-muted font-mono text-xs leading-relaxed italic border-l-2 border-accent pl-4">
-              "A system is only as strong as its weakest interaction loop. I build loop-less systems."
-            </p>
+              <p className="text-text-muted font-mono text-xs leading-relaxed italic border-l-2 border-accent pl-4">
+                "I don't just build features — I build systems that are easy to understand, maintain, and grow."
+              </p>
           </div>
         </div>
 

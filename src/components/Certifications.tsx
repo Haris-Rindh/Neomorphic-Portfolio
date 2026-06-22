@@ -10,7 +10,7 @@ const certs = [
     issuer: 'Coursera / Meta',
     date: 'Jun 15, 2025',
     icon: Code2,
-    link: 'https://drive.google.com/file/d/1Oqu4ciVLb1ACwRzXONNh8rrFUoZv0x-F/view?usp=sharing', // Replace with real credential link
+    link: 'https://drive.google.com/file/d/1Oqu4ciVLb1ACwRzXONNh8rrFUoZv0x-F/view?usp=sharing',
   },
   {
     id: 2,
@@ -20,14 +20,6 @@ const certs = [
     icon: ShieldCheck,
     link: 'https://drive.google.com/file/d/1DTdO0tkcgCDKrPBeURFt0TkOqfpx_ahi/view?usp=sharing',
   },
-  {
-    id: 3,
-    title: 'Introduction to Networks',
-    issuer: 'Cisco',
-    date: 'Jul 04, 2025',
-    icon: Award,
-    link: 'https://drive.google.com/file/d/19sEfmdwihUN9-SX3NTuW8XyhGRLLJ5Bc/view?usp=sharing',
-  }
 ];
 
 // Fixed pattern to prevent hydration mismatches and jumping

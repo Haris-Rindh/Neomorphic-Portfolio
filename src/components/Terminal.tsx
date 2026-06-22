@@ -15,11 +15,11 @@ export function Terminal({ isOpen, onClose }: TerminalProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const bootSequence = [
-    "Initializing Nexus AI Core...",
-    "Loading 3D Assets...",
-    "Mounting Neumorphic UI Components...",
-    "System booted successfully.",
-    "Type 'help' to see available commands."
+    "Booting Haris.dev runtime...",
+    "Loading caffeine reserves... ☕",
+    "Compiling personality modules...",
+    "All systems nominal. Welcome.",
+    "Type 'help' to explore available commands."
   ];
 
   // Reset and re-boot every time the terminal opens
@@ -89,26 +89,124 @@ export function Terminal({ isOpen, onClose }: TerminalProps) {
           id: Math.random().toString(),
           text:
             'Available commands:\n' +
-            '  help      → Lists all available commands.\n' +
-            '  about     → Displays professional bio.\n' +
-            '  projects  → Shows a list of key projects.\n' +
-            '  nexus     → Navigates to the Nexus AI project.\n' +
-            '  clear     → Clears the terminal history.\n' +
-            '  exit      → Closes the terminal.\n\n' +
+            '  help        → Lists all available commands.\n' +
+            '  about       → Displays professional bio.\n' +
+            '  whoami      → Alias for about.\n' +
+            '  skills      → Shows technical skill categories.\n' +
+            '  experience  → Summarizes work history.\n' +
+            '  projects    → Shows a list of key projects.\n' +
+            '  contact     → Displays contact information.\n' +
+            '  github      → Opens GitHub profile.\n' +
+            '  linkedin    → Opens LinkedIn profile.\n' +
+            '  fiverr      → Opens Fiverr profile.\n' +
+            '  resume      → Downloads the CV.\n' +
+            '  nexus       → Navigates to the Nexus AI project.\n' +
+            '  clear       → Clears the terminal history.\n' +
+            '  exit        → Closes the terminal.\n\n' +
             'Tip: Press [Esc] or click × to close anytime.',
           isCommand: false,
         });
         break;
 
       case 'about':
+      case 'whoami':
         newHistory.push({
           id: Math.random().toString(),
           text:
-            'Haris Rindh — MERN Stack Specialist\n' +
-            'Transforming complex problems into elegant, scalable web solutions.\n' +
+            'Haris Rindh — Full Stack Web Developer\n' +
+            'MERN Stack · React · Node.js · TypeScript\n' +
+            '──────────────────────────────────────\n' +
+            'Transforming complex problems into elegant,\n' +
+            'scalable web solutions. 2+ years, 8+ clients,\n' +
+            '10+ production apps shipped.\n' +
             'Open to remote opportunities worldwide.',
           isCommand: false,
         });
+        break;
+
+      case 'skills':
+        newHistory.push({
+          id: Math.random().toString(),
+          text:
+            'Technical Skills:\n' +
+            '  Frontend    → React, Next.js, TypeScript, Tailwind, Framer Motion\n' +
+            '  Backend     → Node.js, Express, MongoDB, Firebase, Socket.io\n' +
+            '  Tools       → Git, Vercel, Vite, GitHub Actions, Postman\n' +
+            '  Special     → SEO, Auth/JWT, AI APIs, E-commerce, WebRTC',
+          isCommand: false,
+        });
+        break;
+
+      case 'experience':
+        newHistory.push({
+          id: Math.random().toString(),
+          text:
+            'Work History:\n' +
+            '  2023–Present  Freelance Web Developer (Remote / Global)\n' +
+            '                8+ clients · MERN Stack · End-to-end delivery\n' +
+            '  2026          Software Engineering Intern @ DevelopersHub\n' +
+            '                E-commerce platform · Nexus SaaS (WebRTC + Stripe)\n' +
+            '  2024          Web Developer @ Umer Surveying (Client)\n' +
+            '                Corporate site · SEO optimization',
+          isCommand: false,
+        });
+        break;
+
+      case 'contact':
+        newHistory.push({
+          id: Math.random().toString(),
+          text:
+            'Contact Information:\n' +
+            '  Email     → haris.rindh.pk@gmail.com\n' +
+            '  LinkedIn  → linkedin.com/in/harisrindh\n' +
+            '  GitHub    → github.com/Haris-Rindh\n' +
+            '  WhatsApp  → wa.me/923037368528\n' +
+            '  Fiverr    → fiverr.com/haris_rindh\n\n' +
+            "Type 'github', 'linkedin', or 'fiverr' to open directly.",
+          isCommand: false,
+        });
+        break;
+
+      case 'github':
+        newHistory.push({
+          id: Math.random().toString(),
+          text: 'Opening GitHub profile...',
+          isCommand: false,
+        });
+        setTimeout(() => window.open('https://github.com/Haris-Rindh', '_blank'), 500);
+        break;
+
+      case 'linkedin':
+        newHistory.push({
+          id: Math.random().toString(),
+          text: 'Opening LinkedIn profile...',
+          isCommand: false,
+        });
+        setTimeout(() => window.open('https://www.linkedin.com/in/harisrindh', '_blank'), 500);
+        break;
+
+      case 'fiverr':
+        newHistory.push({
+          id: Math.random().toString(),
+          text: 'Opening Fiverr profile...',
+          isCommand: false,
+        });
+        setTimeout(() => window.open('https://www.fiverr.com/haris_rindh', '_blank'), 500);
+        break;
+
+      case 'resume':
+      case 'cv':
+        newHistory.push({
+          id: Math.random().toString(),
+          text: 'Initiating CV download...',
+          isCommand: false,
+        });
+        setTimeout(() => {
+          const a = document.createElement('a');
+          a.href = '/resume.pdf';
+          a.download = 'Haris_Rindh_CV.pdf';
+          a.click();
+        }, 500);
         break;
 
       case 'projects':
@@ -211,7 +309,7 @@ export function Terminal({ isOpen, onClose }: TerminalProps) {
 
                 {/* Title */}
                 <span className="font-mono text-xs text-text/80 uppercase tracking-widest font-semibold flex-1 text-center">
-                  Startup CLI — Haris.dev
+                  Dev Console — Haris.dev
                 </span>
 
                 {/* Explicit close button */}

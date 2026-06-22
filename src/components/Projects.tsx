@@ -27,6 +27,7 @@ type Project = {
   liveLink: string;
   github: string;
   image: string;
+  featured: boolean;
 };
 
 const projects: Project[] = [
@@ -40,17 +41,7 @@ const projects: Project[] = [
     liveLink: 'https://nexus-ai-mocha-phi.vercel.app/',
     github: 'https://github.com/Haris-Rindh/NexusAI',
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200',
-  },
-  {
-    id: 'booksphere',
-    title: 'Book Sphere',
-    category: 'Full-Stack Web App',
-    description:
-    'A dynamic library management application with cloud database integration and real-time collaborative updates.',
-    tech: 'React, Firebase, Async API',
-    liveLink: 'https://haris-rindh.github.io/Book-Sphere/',
-    github: 'https://github.com/Haris-Rindh/Book-Sphere',
-    image: booksphere,
+    featured: true,
   },
   {
     id: 'nexus',
@@ -61,18 +52,8 @@ const projects: Project[] = [
     tech: 'MERN Stack, Tailwind, Socket.io, WebRTC',
     liveLink: 'https://nexus-jet-eight-72.vercel.app/',
     github: 'https://github.com/Haris-Rindh/Nexus.git',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200', 
-  },
-  {
-    id: 'umer',
-    title: 'Umer Surveying™',
-    category: 'Corporate Business Site',
-    description:
-      'Designed and deployed the corporate portal for a leading surveying firm with full SEO optimization.',
-    tech: 'HTML5, CSS3, SEO Optimization',
-    liveLink: 'https://haris-rindh.github.io/Umer-Surveying/',
-    github: 'https://github.com/Haris-Rindh/Umer-Surveying',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200',
+    featured: true,
   },
   {
     id: 'prime',
@@ -84,39 +65,7 @@ const projects: Project[] = [
     liveLink: 'https://skyline-apartments-two.vercel.app/',
     github: 'https://github.com/Haris-Rindh/Skyline-apartments.git',
     image: skyline,
-  },
-  {
-    id: 'digital',
-    title: 'Digital Agency',
-    category: 'Portfolio Template',
-    description:
-      "Modern, dark-themed portfolio for creative agencies with immersive animations and micro-interactions.",
-    tech: 'React, Tailwind, Framer Motion',
-    liveLink: 'https://neongrowth.vercel.app/',
-    github: 'https://github.com/Haris-Rindh/neongrowth.git',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200',
-  },
-  {
-    id: 'plumbing',
-    title: 'City Plumbing',
-    category: 'Local Service Site',
-    description:
-      'Conversion-focused layout for emergency plumbing services with integrated lead generation flows.',
-    tech: 'HTML5, CSS3, Lead Gen',
-    liveLink: 'https://swiftfix-plumbing.vercel.app/',
-    github: 'https://github.com/Haris-Rindh/swiftfix-plumbing-landing.git',
-    image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1200',
-  },
-  {
-    id: 'dental',
-    title: 'Zenith Dental',
-    category: 'Medical Website',
-    description:
-      'A professional single-page dental clinic website featuring floating info cards, an interactive booking modal with validation, FAQ accordion, and Smile Gallery.',
-    tech: 'HTML5, Tailwind CSS, Vanilla JS',
-    liveLink: 'https://zenith-dental-one.vercel.app/',
-    github: 'https://github.com/Haris-Rindh/Zenith-dental.git',
-    image: dentalWebsite,
+    featured: true,
   },
   {
     id: 'urban',
@@ -128,8 +77,70 @@ const projects: Project[] = [
     liveLink: 'https://rustic-spoon-nu.vercel.app/',
     github: 'https://github.com/Haris-Rindh/rustic-spoon.git',
     image: rusticSpoon,
+    featured: true,
+  },
+  {
+    id: 'booksphere',
+    title: 'Book Sphere',
+    category: 'Full-Stack Web App',
+    description:
+    'A dynamic library management application with cloud database integration and real-time collaborative updates.',
+    tech: 'React, Firebase, Async API',
+    liveLink: 'https://haris-rindh.github.io/Book-Sphere/',
+    github: 'https://github.com/Haris-Rindh/Book-Sphere',
+    image: booksphere,
+    featured: false,
+  },
+  {
+    id: 'digital',
+    title: 'Digital Agency',
+    category: 'Agency Portfolio',
+    description:
+      "Modern, dark-themed agency portfolio with immersive animations and micro-interactions.",
+    tech: 'React, Tailwind, Framer Motion',
+    liveLink: 'https://neongrowth.vercel.app/',
+    github: 'https://github.com/Haris-Rindh/neongrowth.git',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200',
+    featured: false,
+  },
+  {
+    id: 'umer',
+    title: 'Umer Surveying™',
+    category: 'Corporate Business Site',
+    description:
+      'Designed and deployed the corporate portal for a leading surveying firm with full SEO optimization.',
+    tech: 'HTML5, CSS3, SEO Optimization',
+    liveLink: 'https://haris-rindh.github.io/Umer-Surveying/',
+    github: 'https://github.com/Haris-Rindh/Umer-Surveying',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200',
+    featured: false,
+  },
+  {
+    id: 'dental',
+    title: 'Zenith Dental',
+    category: 'Medical Website',
+    description:
+      'A professional dental clinic website featuring floating info cards, an interactive booking modal with validation, FAQ accordion, and Smile Gallery.',
+    tech: 'HTML5, Tailwind CSS, Vanilla JS',
+    liveLink: 'https://zenith-dental-one.vercel.app/',
+    github: 'https://github.com/Haris-Rindh/Zenith-dental.git',
+    image: dentalWebsite,
+    featured: false,
+  },
+  {
+    id: 'plumbing',
+    title: 'City Plumbing',
+    category: 'Local Service Site',
+    description:
+      'Conversion-focused layout for emergency plumbing services with integrated lead generation flows.',
+    tech: 'HTML5, CSS3, Lead Gen',
+    liveLink: 'https://swiftfix-plumbing.vercel.app/',
+    github: 'https://github.com/Haris-Rindh/swiftfix-plumbing-landing.git',
+    image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1200',
+    featured: false,
   },
 ];
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Constants
@@ -148,14 +159,17 @@ const ACCENT_COLORS = [
 // Map colors dynamically so they loop perfectly, matching projects.length
 const PROJECT_COLORS = projects.map((_, i) => ACCENT_COLORS[i % ACCENT_COLORS.length]);
 
+// Featured projects only appear in the scroll spotlight phase
+const featuredProjects = projects.filter((p) => p.featured);
+
 // Each project gets PER_PROJECT_VH of vertical scroll "room"
 const PER_PROJECT_VH = 90;
 // Additional scroll for the all-grid phase
 const GRID_VH = 120;
-const TOTAL_VH = projects.length * PER_PROJECT_VH + GRID_VH;
+const TOTAL_VH = featuredProjects.length * PER_PROJECT_VH + GRID_VH;
 
 // Normalised scroll fraction where grid phase begins
-const GRID_START_FRAC = (projects.length * PER_PROJECT_VH) / TOTAL_VH;
+const GRID_START_FRAC = (featuredProjects.length * PER_PROJECT_VH) / TOTAL_VH;
 
 // Shared easing that matches the spec
 const CUSTOM_EASE = [0.76, 0, 0.24, 1] as const;
@@ -471,14 +485,14 @@ export function Projects() {
     scrollYProgress,
     [
       0,
-      ...projects.map((_, i) => ((i + 0.5) * PER_PROJECT_VH) / TOTAL_VH),
+      ...featuredProjects.map((_, i) => ((i + 0.5) * PER_PROJECT_VH) / TOTAL_VH),
       GRID_START_FRAC,
       1,
     ],
     [
       'rgba(49,130,206,0)',
-      ...PROJECT_COLORS,
-      PROJECT_COLORS[PROJECT_COLORS.length - 1], // Matches grid start with last project color
+      ...featuredProjects.map((_, i) => ACCENT_COLORS[i % ACCENT_COLORS.length]),
+      ACCENT_COLORS[(featuredProjects.length - 1) % ACCENT_COLORS.length],
       'rgba(252,129,74,0)',
     ]
   );
@@ -487,7 +501,7 @@ export function Projects() {
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
     setIsGrid(v >= GRID_START_FRAC);
     const raw = (v * TOTAL_VH) / PER_PROJECT_VH;
-    const idx = Math.min(Math.max(Math.floor(raw), 0), projects.length - 1);
+    const idx = Math.min(Math.max(Math.floor(raw), 0), featuredProjects.length - 1);
     setActiveIndex(idx);
   });
 
@@ -583,7 +597,7 @@ export function Projects() {
                   </AnimatePresence>
                 </div>
                 <span className="text-text-muted/50">—</span>
-                <span>{String(projects.length).padStart(2, '0')}</span>
+                <span>{String(featuredProjects.length).padStart(2, '0')}</span>
               </div>
             )}
           </div>
@@ -598,7 +612,7 @@ export function Projects() {
                 transition={{ duration: 0.35 }}
                 className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-[60] flex flex-col items-center gap-1.5"
               >
-                {projects.map((_, i) => (
+                {featuredProjects.map((_, i) => (
                   <motion.div
                     key={i}
                     className="rounded-full"
@@ -633,7 +647,7 @@ export function Projects() {
             className="absolute inset-0"
             style={{ pointerEvents: isGrid ? 'none' : undefined }}
           >
-            {projects.map((project, i) => (
+            {featuredProjects.map((project, i) => (
               <SpotlightCard
                 key={project.id}
                 project={project}

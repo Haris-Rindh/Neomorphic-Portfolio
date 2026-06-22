@@ -186,6 +186,16 @@ export function Hero() {
               <div className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_rgba(49,130,206,0.5)]" />
               <span className="text-xs sm:text-sm font-mono uppercase tracking-tighter text-text">Focus: Scalability</span>
             </motion.div>
+
+            {/* Timezone badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.6 }}
+              className="absolute -bottom-10 right-0 lg:-bottom-14 lg:right-0 glass px-3 py-2 rounded-xl flex items-center space-x-2 shadow-neo-flat border border-white/10 hidden sm:flex z-30"
+            >
+              <span className="text-xs font-mono text-text-muted uppercase tracking-tighter">📍 Pakistan · GMT+5</span>
+            </motion.div>
           </motion.div>
         </div>
       </div>
