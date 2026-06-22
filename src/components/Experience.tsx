@@ -8,24 +8,24 @@ const experiences = [
     role: "Freelance Web Developer",
     company: "Self-Employed",
     location: "Remote / Global",
-    period: "Present",
-    description: "Delivering end-to-end full-stack web development services for various clients. Specializing in building scalable, responsive, and highly optimized modern web applications.",
-    highlights: ["Full-Stack Dev", "Client Relations", "Modern Web"]
+    period: "2023 – Present",
+    description: "Delivering end-to-end full-stack web development for 8+ clients across multiple industries. Built production-ready applications using the MERN stack — from scoping requirements to final deployment on Vercel.",
+    highlights: ["MERN Stack", "8+ Clients", "End-to-End Delivery"]
   },
   {
     role: "Software Engineering Intern",
     company: "DevelopersHub Corporation",
     location: "Remote",
     period: "2026 (6 Weeks)",
-    description: "Completed an intensive 6-week internship program. Spearheaded the development of a fully functional E-commerce platform and contributed core features to 'Nexus' — a comprehensive collaboration platform for Investors and Entrepreneurs.",
-    highlights: ["E-commerce", "SaaS Development", "Team Collaboration"]
+    description: "Completed an intensive 6-week internship. Led development of a fully functional E-commerce platform and contributed core features to 'Nexus' — a collaboration platform for Investors and Entrepreneurs, featuring real-time video calling and Stripe payments.",
+    highlights: ["E-commerce", "SaaS Development", "WebRTC / Stripe"]
   },
   {
     role: "Web Developer",
-    company: "Umer Surveying (Local Client)",
+    company: "Umer Surveying (Client)",
     location: "Remote",
     period: "2024",
-    description: "Designed and engineered a professional corporate website for 'Umer Surveying', a specialized construction and surveying services company. Delivered a highly responsive, SEO-optimized landing experience to drive client acquisition.",
+    description: "Designed and deployed a professional corporate website for a construction and surveying company. Delivered a fully responsive, SEO-optimized site to improve online visibility and drive client inquiries.",
     highlights: ["Corporate Website", "SEO Optimization", "UI/UX Design"]
   }
 ];

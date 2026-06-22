@@ -3,10 +3,10 @@ import { motion, useInView, useMotionValue, useSpring } from 'motion/react';
 import { TextReveal } from './TextReveal';
 
 const stats = [
-  { label: 'Years of Exp.', num: 3, prefix: '0', suffix: '+' },
-  { label: 'Projects Done', num: 20, prefix: '', suffix: '+' },
-  { label: 'Success Rate', num: 100, prefix: '', suffix: '%' },
-  { label: 'Client Satisfaction', num: 5, prefix: '', suffix: '/5' },
+  { label: 'Years of Exp.', num: 2, prefix: '0', suffix: '+' },
+  { label: 'Projects Shipped', num: 10, prefix: '', suffix: '+' },
+  { label: 'Clients Served', num: 8, prefix: '', suffix: '+' },
+  { label: 'On-Time Delivery', num: 100, prefix: '', suffix: '%' },
 ];
 
 function Counter({ num, prefix = '', suffix = '' }: { num: number, prefix?: string, suffix?: string }) {
@@ -48,7 +48,7 @@ export function About() {
           {/* Left: Bio Story */}
           <div className="w-full lg:w-3/5 space-y-10">
             <div className="flex flex-col space-y-4">
-              <span className="text-accent font-mono text-xs uppercase tracking-widest bg-accent/10 py-1.5 px-4 rounded-full w-max shadow-neo-flat-sm border border-white/20">The Visionary</span>
+              <span className="text-accent font-mono text-xs uppercase tracking-widest bg-accent/10 py-1.5 px-4 rounded-full w-max shadow-neo-flat-sm border border-white/20">About Me</span>
               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-medium text-text leading-[0.9] uppercase">
                 <TextReveal text="THE DEVELOPER <br/> BEHIND THE CODE" />
               </h2>

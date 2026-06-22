@@ -100,7 +100,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                  onClick={onOpenTerminal}
                  className="neo-btn px-6 py-2 rounded-full text-xs font-mono uppercase tracking-widest text-text hover:text-accent transition-colors"
               >
-                 Startup CLI
+                 Dev Console
               </button>
            </div>
 
@@ -151,7 +151,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
                     }}
                     className="neo-btn px-8 py-3.5 rounded-full text-sm font-mono uppercase tracking-widest text-text hover:text-accent transition-colors"
                  >
-                    Startup CLI
+                    Dev Console
                  </button>
               </div>
             </div>
