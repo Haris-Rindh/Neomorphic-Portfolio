@@ -236,7 +236,7 @@ function SpotlightCard({
 
   return (
     <motion.div
-      className="absolute inset-0 flex items-center justify-center px-4 md:px-10 pt-20 pb-4"
+      className="absolute inset-0 flex items-center justify-center px-3 md:px-8 pt-24 pb-6"
       style={{
         y: reduced ? yReduced : yFull,
         scale: reduced ? scaleReduced : scaleFull,
@@ -246,14 +246,14 @@ function SpotlightCard({
         zIndex,
       }}
     >
-      <div className="w-full max-w-6xl flex flex-col lg:flex-row h-auto min-h-[60vh] lg:h-[70vh] lg:max-h-[540px] neo-flat rounded-[32px] md:rounded-[36px] overflow-hidden group relative shadow-neo-elevated items-stretch">
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row neo-flat rounded-[28px] md:rounded-[36px] overflow-hidden group relative shadow-neo-elevated items-stretch" style={{ height: 'min(72vh, 560px)', minHeight: '420px' }}>
         {/* ── Left: Text content ── */}
-        <div className="flex-1 w-full lg:w-[58%] min-w-0 p-6 md:p-12 lg:p-14 flex flex-col justify-between z-10 shrink-1 gap-6">
-          <div className="space-y-4 md:space-y-5">
+        <div className="flex flex-col w-full lg:w-[58%] min-w-0 p-5 md:p-10 lg:p-12 z-10 overflow-y-auto" style={{ maxHeight: '100%' }}>
+          <div className="space-y-3 md:space-y-4 flex-1">
             <span className="inline-flex items-center font-mono text-xs text-accent uppercase tracking-widest bg-accent/10 py-1 px-3 rounded-full">
               {project.category}
             </span>
-            <h3 className="text-3xl md:text-4xl xl:text-5xl font-display font-bold text-text uppercase tracking-tight leading-[0.95] break-words hyphens-auto">
+            <h3 className="text-2xl md:text-4xl xl:text-5xl font-display font-bold text-text uppercase tracking-tight leading-[0.95] break-words hyphens-auto">
               {project.title}
             </h3>
             <p className="max-w-md text-text-muted text-sm md:text-base leading-relaxed break-words">
@@ -264,7 +264,7 @@ function SpotlightCard({
               {project.tech.split(', ').map((tag) => (
                 <span
                   key={tag}
-                  className="font-mono text-xs md:text-xs text-accent uppercase tracking-wider border border-accent/25 bg-accent/5 px-2 py-0.5 rounded"
+                  className="font-mono text-xs text-accent uppercase tracking-wider border border-accent/25 bg-accent/5 px-2 py-0.5 rounded"
                 >
                   {tag}
                 </span>
@@ -272,13 +272,13 @@ function SpotlightCard({
             </div>
           </div>
 
-          {/* CTAs */}
-          <div className="flex items-center gap-4 pt-6">
+          {/* CTAs — always visible, never clipped */}
+          <div className="flex items-center gap-3 pt-5 mt-auto flex-shrink-0">
             <a
               href={project.liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="neo-btn px-7 py-3.5 rounded-full font-display font-medium text-text flex items-center gap-2 hover:text-accent transition-colors group/cta"
+              className="neo-btn px-5 py-3 rounded-full font-display font-medium text-text text-sm flex items-center gap-2 hover:text-accent transition-colors group/cta"
             >
               <span>Live Site</span>
               <ArrowUpRight className="w-4 h-4 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 transition-transform" />
@@ -287,7 +287,7 @@ function SpotlightCard({
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 neo-convex rounded-full flex items-center justify-center text-text-muted hover:text-accent transition-colors"
+              className="w-11 h-11 neo-convex rounded-full flex items-center justify-center text-text-muted hover:text-accent transition-colors flex-shrink-0"
             >
               <Github className="w-5 h-5" />
             </a>

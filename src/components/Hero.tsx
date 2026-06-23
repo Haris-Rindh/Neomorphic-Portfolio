@@ -116,7 +116,7 @@ export function Hero() {
             </Magnetic>
             
             <Magnetic>
-              <a href="/resume.pdf" download="Haris_Rindh_CV.pdf" target="_blank" className="neo-convex px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-display font-medium text-text flex items-center space-x-2 hover:text-accent transition-colors group">
+              <a href="https://drive.google.com/file/d/1WokgDZ72zEEkS-Wbv7Fx4Cs6UUzNOKyx/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="neo-convex px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-display font-medium text-text flex items-center space-x-2 hover:text-accent transition-colors group">
                 <span>Download CV</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </a>

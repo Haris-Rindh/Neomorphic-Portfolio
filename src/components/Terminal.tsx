@@ -99,8 +99,7 @@ export function Terminal({ isOpen, onClose }: TerminalProps) {
             '  github      → Opens GitHub profile.\n' +
             '  linkedin    → Opens LinkedIn profile.\n' +
             '  fiverr      → Opens Fiverr profile.\n' +
-            '  resume      → Downloads the CV.\n' +
-            '  nexus       → Navigates to the Nexus AI project.\n' +
+            '  resume      → Opens the CV.\n' +
             '  clear       → Clears the terminal history.\n' +
             '  exit        → Closes the terminal.\n\n' +
             'Tip: Press [Esc] or click × to close anytime.',
@@ -198,14 +197,11 @@ export function Terminal({ isOpen, onClose }: TerminalProps) {
       case 'cv':
         newHistory.push({
           id: Math.random().toString(),
-          text: 'Initiating CV download...',
+          text: 'Opening CV in a new tab...',
           isCommand: false,
         });
         setTimeout(() => {
-          const a = document.createElement('a');
-          a.href = '/resume.pdf';
-          a.download = 'Haris_Rindh_CV.pdf';
-          a.click();
+          window.open('https://drive.google.com/file/d/1WokgDZ72zEEkS-Wbv7Fx4Cs6UUzNOKyx/view?usp=sharing', '_blank');
         }, 500);
         break;
 
@@ -214,28 +210,15 @@ export function Terminal({ isOpen, onClose }: TerminalProps) {
           id: Math.random().toString(),
           text:
             'Key Projects:\n' +
-            '  1. Nexus AI       — Enterprise SaaS Platform\n' +
-            '  2. Book Sphere    — Full-Stack Library App\n' +
-            '  3. Skyline Apartments — Luxury Real Estate\n' +
-            '  4. Digital Agency — Portfolio Template\n' +
-            '  5. Rustic Spoon   — Hospitality Site\n\n' +
-            "Type 'nexus' to navigate directly to the featured project.",
+            '  1. Nexus AI          — Enterprise SaaS Platform\n' +
+            '  2. NEXUS             — Investor Collaboration Platform\n' +
+            '  3. Skyline Apartments — Luxury Real Estate SPA\n' +
+            '  4. Rustic Spoon      — Premium Restaurant Site\n' +
+            '  + 5 more in the portfolio grid.',
           isCommand: false,
         });
         break;
 
-      case 'nexus':
-        newHistory.push({
-          id: Math.random().toString(),
-          text: 'Navigating to Nexus AI project...',
-          isCommand: false,
-        });
-        setTimeout(() => {
-          const section = document.getElementById('projects');
-          if (section) section.scrollIntoView({ behavior: 'smooth' });
-          onClose();
-        }, 700);
-        break;
 
       case 'clear':
         setHistory([]);
