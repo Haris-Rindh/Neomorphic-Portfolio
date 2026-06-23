@@ -139,7 +139,56 @@ const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1200',
     featured: false,
   },
+  {
+    id: 'securechat',
+    title: 'SecureChat',
+    category: 'Security / Real-Time App',
+    description:
+      'A browser-based, zero-trust E2EE messaging PWA. All messages, files, and voice recordings are encrypted client-side via ECDH + AES-GCM before reaching Firebase. Features a Duress PIN, disappearing messages, and panic redirect.',
+    tech: 'HTML, Firebase, Web Crypto API, PWA, AES-GCM, ECDH',
+    liveLink: 'https://github.com/Haris-Rindh/securechat',
+    github: 'https://github.com/Haris-Rindh/securechat',
+    image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1200',
+    featured: false,
+  },
+  {
+    id: 'trendtrove',
+    title: 'TrendTrove',
+    category: 'B2B E-Commerce Platform',
+    description:
+      'A scalable B2B e-commerce platform with Firebase auth, wishlist & cart, order management, admin dashboard with bulk import, advanced product search, and category filtering.',
+    tech: 'React, Vite, Firebase, Tailwind CSS, Context API',
+    liveLink: 'https://github.com/Haris-Rindh/ecommerce-website',
+    github: 'https://github.com/Haris-Rindh/ecommerce-website',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200',
+    featured: false,
+  },
+  {
+    id: 'mashaallah',
+    title: 'MashaAllah Store',
+    category: 'Full-Stack Client Project',
+    description:
+      'A real client e-commerce site for a retail store (bangles, cosmetics, jewellery). Built with React + Node.js/Express + MongoDB + Cloudinary. Features GSAP animations, Lenis smooth scroll, a PIN-gated admin panel, and WhatsApp-integrated order flow.',
+    tech: 'React, Node.js, Express, MongoDB, Cloudinary, GSAP, Three.js',
+    liveLink: 'https://github.com/Haris-Rindh/MashaAllah-bangles-store',
+    github: 'https://github.com/Haris-Rindh/MashaAllah-bangles-store',
+    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1200',
+    featured: false,
+  },
+  {
+    id: 'vulms',
+    title: 'VULMS Handler',
+    category: 'Browser Extension / Dev Tool',
+    description:
+      'An automated LMS deadline notifier for VU students. V1 is a Chrome extension that scrapes assignments and fires escalating push notifications. V2 is a full backend (Node.js + Playwright + SQLite + AES-256-GCM) with web-push to desktop and mobile, running 24/7 on a cloud VM.',
+    tech: 'JavaScript, Chrome Extension API, Playwright, Node.js, SQLite, Web Push, AES-256-GCM',
+    liveLink: 'https://github.com/Haris-Rindh/VULMS-Handler',
+    github: 'https://github.com/Haris-Rindh/VULMS-Handler',
+    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=1200',
+    featured: false,
+  },
 ];
+
 
 
 // ─────────────────────────────────────────────────────────────────────────────
