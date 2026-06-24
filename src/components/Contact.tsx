@@ -1,10 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Mail, Linkedin, Github, MessageCircle, ArrowRight } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { TextReveal } from './TextReveal';
 
 export function Contact() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email || !message) {
+      setStatus('error');
+      setErrorMessage('All fields are required.');
+      return;
+    }
+    setStatus('sending');
+    setErrorMessage('');
+
+    try {
+      const payload = {
+        service_id: 'service_bfb9zzx',
+        template_id: 'template_pz38kdu',
+        user_id: '4u41MVsnQ6mWKycsm',
+        template_params: {
+          from_name: name,
+          name: name,
+          from_email: email,
+          email: email,
+          message: message,
+        }
+      };
+
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setName('');
+        setEmail('');
+        setMessage('');
+      } else {
+        const text = await response.text();
+        throw new Error(text || 'Failed to send.');
+      }
+    } catch (err: any) {
+      console.error(err);
+      setStatus('error');
+      setErrorMessage(err.message || 'An error occurred. Please try again.');
+    }
+  };
+
   return (
     <section id="contact" className="py-20 lg:py-32 bg-bg relative overflow-hidden">
       {/* Immersive background glow */}
@@ -25,35 +79,89 @@ export function Contact() {
         {/* Contact Grid */}
         <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
           
-          {/* Email Card (Main CTA) */}
+          {/* Email / Contact Form Card (Main CTA) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: false }}
-            className="lg:col-span-2 neo-flat p-6 md:p-14 rounded-[32px] md:rounded-[48px] flex flex-col justify-between group hover:neo-concave transition-all duration-500 relative overflow-hidden"
+            className="lg:col-span-2 neo-flat p-6 md:p-10 rounded-[32px] md:rounded-[48px] flex flex-col justify-between transition-all duration-500 relative overflow-hidden"
           >
-             <div className="space-y-4 md:space-y-6">
-                <div className="w-16 h-16 neo-convex rounded-2xl flex items-center justify-center text-accent group-hover:neo-concave transition-all">
-                  <Mail size={32} />
+             <form onSubmit={handleSubmit} className="space-y-5 flex-1 flex flex-col w-full">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 neo-convex rounded-xl flex items-center justify-center text-accent">
+                    <Mail size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-display font-bold text-text">Send Message</h3>
+                    <p className="text-text-muted text-xs font-light">Email lands directly in my inbox.</p>
+                  </div>
                 </div>
-                <div className="space-y-2">
-                   <h3 className="text-3xl font-display font-bold text-text">Direct Inquiry</h3>
-                   <p className="text-text-muted font-light">The fastest way to get a project estimate or interview invitation.</p>
-                </div>
-             </div>
-             
-             <div className="mt-12 flex flex-col sm:flex-row items-center gap-6 relative z-10">
-                <a 
-                  href="mailto:haris.rindh.pk@gmail.com" 
-                  className="w-full xl:w-max neo-btn px-5 sm:px-10 py-3.5 sm:py-5 rounded-[20px] sm:rounded-full font-display text-sm md:text-xl text-text hover:text-accent hover:shadow-[0_0_24px_rgba(49,130,206,0.3)] flex items-center justify-center space-x-2 sm:space-x-3 transition-all duration-300 group/btn break-all sm:break-normal"
-                >
-                   <span>haris.rindh.pk@gmail.com</span>
-                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover/btn:translate-x-1 transition-transform shrink-0" />
-                </a>
-             </div>
 
-             {/* Decorative Ghost Text */}
-             <span className="absolute bottom-[-5px] sm:bottom-[-10px] right-2 sm:right-8 font-display text-[3.5rem] sm:text-[5rem] font-bold text-accent/5 pointer-events-none select-none uppercase z-0">EMAIL</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block font-mono text-[10px] uppercase tracking-wider text-text-muted mb-1.5">Your Name</label>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="John Doe"
+                      className="w-full px-5 py-3 rounded-2xl bg-bg shadow-neo-concave text-text border border-transparent outline-none focus:border-accent/30 transition-all font-sans text-sm"
+                      required
+                      disabled={status === 'sending'}
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-mono text-[10px] uppercase tracking-wider text-text-muted mb-1.5">Your Email</label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="john@example.com"
+                      className="w-full px-5 py-3 rounded-2xl bg-bg shadow-neo-concave text-text border border-transparent outline-none focus:border-accent/30 transition-all font-sans text-sm"
+                      required
+                      disabled={status === 'sending'}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-mono text-[10px] uppercase tracking-wider text-text-muted mb-1.5">Your Message</label>
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Tell me about your project or inquiry..."
+                    rows={4}
+                    className="w-full px-5 py-3 rounded-2xl bg-bg shadow-neo-concave text-text border border-transparent outline-none focus:border-accent/30 transition-all font-sans text-sm resize-none"
+                    required
+                    disabled={status === 'sending'}
+                  />
+                </div>
+
+                <div className="pt-4 mt-auto">
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className="w-full neo-btn py-3.5 rounded-full font-display font-medium text-sm text-text hover:text-accent hover:shadow-[0_0_24px_rgba(49,130,206,0.3)] flex items-center justify-center space-x-2 transition-all duration-300 disabled:opacity-50 cursor-pointer"
+                  >
+                    {status === 'sending' ? (
+                      <span>Sending Message...</span>
+                    ) : status === 'success' ? (
+                      <span className="text-green-500 font-bold">Message Sent! ✓</span>
+                    ) : (
+                      <>
+                        <span>Send Message</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
+                  
+                  {status === 'error' && (
+                    <p className="text-red-500 font-mono text-[10px] mt-2 text-center">{errorMessage}</p>
+                  )}
+                  {status === 'success' && (
+                    <p className="text-green-500 font-mono text-[10px] mt-2 text-center">Thank you! Your message has been sent.</p>
+                  )}
+                </div>
+             </form>
           </motion.div>
 
           {/* Social Links Card */}

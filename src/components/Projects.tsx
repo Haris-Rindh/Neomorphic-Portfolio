@@ -14,6 +14,10 @@ import booksphere from '../assets/booksphere.png';
 import dentalWebsite from '../assets/dental_website.png';
 import rusticSpoon from '../assets/rustic_spoon.png';
 import skyline from '../assets/skyline.png';
+import MashaAllah from '../assets/MashaAllah_bangles.png';
+import trendtrove from '../assets/trendtrove.png';
+import Surveying from '../assets/UmerSurveying.png';
+import Plumbing from '../assets/CityPlumbing.png';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Data
@@ -112,7 +116,7 @@ const projects: Project[] = [
     tech: 'HTML5, CSS3, SEO Optimization',
     liveLink: 'https://haris-rindh.github.io/Umer-Surveying/',
     github: 'https://github.com/Haris-Rindh/Umer-Surveying',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200',
+    image: Surveying,
     featured: false,
   },
   {
@@ -136,7 +140,7 @@ const projects: Project[] = [
     tech: 'HTML5, CSS3, Lead Gen',
     liveLink: 'https://swiftfix-plumbing.vercel.app/',
     github: 'https://github.com/Haris-Rindh/swiftfix-plumbing-landing.git',
-    image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=1200',
+    image: Plumbing,
     featured: false,
   },
   {
@@ -160,7 +164,7 @@ const projects: Project[] = [
     tech: 'React, Vite, Firebase, Tailwind CSS, Context API',
     liveLink: 'https://github.com/Haris-Rindh/ecommerce-website',
     github: 'https://github.com/Haris-Rindh/ecommerce-website',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200',
+    image: trendtrove,
     featured: false,
   },
   {
@@ -172,7 +176,7 @@ const projects: Project[] = [
     tech: 'React, Node.js, Express, MongoDB, Cloudinary, GSAP, Three.js',
     liveLink: 'https://github.com/Haris-Rindh/MashaAllah-bangles-store',
     github: 'https://github.com/Haris-Rindh/MashaAllah-bangles-store',
-    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1200',
+    image: MashaAllah,
     featured: false,
   },
   {

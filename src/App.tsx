@@ -11,6 +11,7 @@ import { Skills } from './components/Skills';
 import { Certifications } from './components/Certifications';
 import { Projects } from './components/Projects';
 import { Contact } from './components/Contact';
+import { Testimonials } from './components/Testimonials';
 import { Terminal } from './components/Terminal';
 import { ScrollProgress } from './components/ScrollProgress';
 import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
@@ -55,6 +56,7 @@ export default function App() {
           <Skills />
           <Certifications />
           <Process />
+          <Testimonials />
           <Contact />
 
           <footer className="px-6 md:px-12 py-12 border-t border-dark-shadow/10 mt-12 bg-bg/50 backdrop-blur-sm">
