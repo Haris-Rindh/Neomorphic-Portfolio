@@ -213,15 +213,35 @@ const featuredProjects = projects.filter((p) => p.featured);
 
 // Each project gets PER_PROJECT_VH of vertical scroll "room"
 const PER_PROJECT_VH = 90;
-// Additional scroll for the all-grid phase
-const GRID_VH = 120;
-const TOTAL_VH = featuredProjects.length * PER_PROJECT_VH + GRID_VH;
-
-// Normalised scroll fraction where grid phase begins
-const GRID_START_FRAC = (featuredProjects.length * PER_PROJECT_VH) / TOTAL_VH;
+const TOTAL_VH = featuredProjects.length * PER_PROJECT_VH;
 
 // Shared easing that matches the spec
 const CUSTOM_EASE = [0.76, 0, 0.24, 1] as const;
+
+const filterCategories = [
+  { id: 'all', label: 'All Projects' },
+  { id: 'saas', label: 'SaaS & Full-Stack' },
+  { id: 'websites', label: 'Websites' },
+  { id: 'tools', label: 'Dev Tools & Security' }
+];
+
+const getFilteredProjects = (category: string) => {
+  const nonFeatured = projects.filter(p => !p.featured);
+  if (category === 'all') return nonFeatured;
+  return nonFeatured.filter(project => {
+    const id = project.id;
+    if (category === 'saas') {
+      return ['booksphere', 'trendtrove', 'mashaallah'].includes(id);
+    }
+    if (category === 'websites') {
+      return ['digital', 'umer', 'dental', 'plumbing'].includes(id);
+    }
+    if (category === 'tools') {
+      return ['securechat', 'vulms'].includes(id);
+    }
+    return true;
+  });
+};
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SpotlightCard — fully scroll-driven per-project card
@@ -365,73 +385,74 @@ function SpotlightCard({
 // ─────────────────────────────────────────────────────────────────────────────
 // GridCard — compact card for the grid phase
 // ─────────────────────────────────────────────────────────────────────────────
-function GridCard({ project, index }: { key?: React.Key; project: Project; index: number }) {
-  const firstTags = project.tech.split(', ').slice(0, 2);
-  const extraCount = project.tech.split(', ').length - 2;
-
+function GridCard({ project, index }: { project: Project; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 36, scale: 0.94 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 36, scale: 0.94 }}
+      initial={{ opacity: 0, y: 30, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-30px" }}
       transition={{
-        delay: index * 0.07,
-        duration: 0.45,
+        delay: (index % 4) * 0.05,
+        duration: 0.4,
         ease: CUSTOM_EASE,
       }}
-      className="neo-convex rounded-2xl overflow-hidden group cursor-pointer hover:neo-flat transition-all duration-300"
+      className="neo-flat rounded-[22px] overflow-hidden flex flex-col h-full hover:shadow-neo-elevated hover:scale-[1.01] transition-all duration-300 group"
     >
-      {/* Image */}
-      <div className="relative h-28 md:h-36 overflow-hidden">
+      {/* Image Header */}
+      <div className="relative h-32 overflow-hidden w-full neo-concave rounded-t-[22px]">
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-700"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-3">
-          <h4 className="font-display text-white text-xs md:text-sm font-bold truncate leading-tight">
-            {project.title}
-          </h4>
-          <p className="font-mono text-white/55 text-sm uppercase tracking-wider truncate mt-0.5">
-            {project.category}
-          </p>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-black/10 to-transparent" />
       </div>
+      
+      {/* Text Body */}
+      <div className="p-4.5 flex flex-col space-y-2.5 flex-1">
+        <span className="inline-flex items-center font-mono text-[9px] text-accent uppercase tracking-widest bg-accent/10 py-0.5 px-2 rounded-full w-max">
+          {project.category}
+        </span>
+        <h3 className="text-lg font-display font-bold text-text uppercase tracking-tight leading-tight">
+          {project.title}
+        </h3>
+        <p className="text-text-muted text-xs leading-relaxed line-clamp-2">
+          {project.description}
+        </p>
 
-      {/* Footer */}
-      <div className="p-2.5 md:p-3 flex items-center gap-2">
-        <div className="flex flex-wrap gap-1 flex-1 min-w-0">
-          {firstTags.map((t) => (
+        {/* Tech tags */}
+        <div className="flex flex-wrap gap-1 pt-1">
+          {project.tech.split(', ').slice(0, 4).map((tag) => (
             <span
-              key={t}
-              className="font-mono text-xs md:text-sm text-accent uppercase tracking-tight border border-accent/20 bg-accent/5 px-1.5 py-0.5 rounded truncate"
+              key={tag}
+              className="font-mono text-[9px] text-accent uppercase tracking-wider border border-accent/25 bg-accent/5 px-1.5 py-0.2 rounded"
             >
-              {t}
+              {tag}
             </span>
           ))}
-          {extraCount > 0 && (
-            <span className="font-mono text-xs text-text-muted uppercase">
-              +{extraCount}
+          {project.tech.split(', ').length > 4 && (
+            <span className="font-mono text-[9px] text-text-muted uppercase px-1 py-0.2">
+              +{project.tech.split(', ').length - 4}
             </span>
           )}
         </div>
-        <div className="flex items-center gap-2 flex-shrink-0">
+
+        {/* Action Buttons */}
+        <div className="flex items-center gap-2 pt-4 mt-auto border-t border-dark-shadow/10">
           <a
             href={project.liveLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-text-muted hover:text-accent transition-colors"
-            onClick={(e) => e.stopPropagation()}
+            className="flex-1 min-h-[34px] neo-btn px-3 py-1 rounded-full font-display font-medium text-text text-xs flex items-center justify-center gap-1 hover:text-accent transition-colors"
           >
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>Live Site</span>
+            <ArrowUpRight className="w-3 h-3" />
           </a>
           <a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-text-muted hover:text-accent transition-colors"
-            onClick={(e) => e.stopPropagation()}
+            className="w-8 h-8 shrink-0 neo-convex rounded-full flex items-center justify-center text-text-muted hover:text-accent transition-colors"
           >
             <Github className="w-3.5 h-3.5" />
           </a>
@@ -527,7 +548,8 @@ export function Projects() {
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isGrid, setIsGrid] = useState(false);
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Per-project background accent colour mapped to the exact length of the projects array
   const bgColor = useTransform(
@@ -535,20 +557,17 @@ export function Projects() {
     [
       0,
       ...featuredProjects.map((_, i) => ((i + 0.5) * PER_PROJECT_VH) / TOTAL_VH),
-      GRID_START_FRAC,
       1,
     ],
     [
       'rgba(49,130,206,0)',
       ...featuredProjects.map((_, i) => ACCENT_COLORS[i % ACCENT_COLORS.length]),
-      ACCENT_COLORS[(featuredProjects.length - 1) % ACCENT_COLORS.length],
       'rgba(252,129,74,0)',
     ]
   );
 
-  // Derive state from scroll position (drives counter + dots + grid phase)
+  // Derive state from scroll position
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    setIsGrid(v >= GRID_START_FRAC);
     const raw = (v * TOTAL_VH) / PER_PROJECT_VH;
     const idx = Math.min(Math.max(Math.floor(raw), 0), featuredProjects.length - 1);
     setActiveIndex(idx);
@@ -561,11 +580,11 @@ export function Projects() {
       <div className="block lg:hidden py-20 px-0 w-full overflow-hidden relative">
         <div className="px-6 md:px-12 space-y-4 mb-8">
           <p className="font-mono text-xs sm:text-xs text-accent uppercase tracking-widest mb-0.5">
-            Full Portfolio
+            Spotlight Showcase
           </p>
           <div className="flex items-center justify-between">
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-text leading-none uppercase">
-              All Projects
+              Featured Projects
             </h2>
             <div className="flex items-center gap-1.5 text-text-muted font-mono text-xs uppercase border border-dark-shadow/20 px-2.5 py-1 rounded-full shadow-neo-flat-sm bg-bg">
               <span className="animate-pulse">Swipe</span>
@@ -579,7 +598,7 @@ export function Projects() {
           className="flex overflow-x-auto snap-x snap-mandatory px-6 md:px-12 pb-12 gap-6" 
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {projects.map((project, i) => (
+          {featuredProjects.map((project, i) => (
             <div key={project.id} className="snap-center shrink-0 w-[85vw] sm:w-[360px] h-auto flex flex-col">
               <MobileProjectCard project={project} index={i} />
             </div>
@@ -610,92 +629,65 @@ export function Projects() {
 
           {/* ══ HUD: top bar ══ */}
           <div className="absolute top-0 left-0 right-0 z-[60] px-5 md:px-10 pt-6 flex items-end justify-between">
-            {/* Label that morphs between phases */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={isGrid ? 'phase-grid' : 'phase-spotlight'}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.4, ease: CUSTOM_EASE }}
-              >
-                <p className="font-mono text-xs text-accent uppercase tracking-widest mb-0.5">
-                  {isGrid ? 'Full Portfolio' : 'Spotlight Showcase'}
-                </p>
-                <h2 className="text-2xl md:text-3xl font-display font-bold text-text leading-none">
-                  {isGrid ? 'ALL PROJECTS' : 'FEATURED PROJECT'}
-                </h2>
-              </motion.div>
-            </AnimatePresence>
+            <div>
+              <p className="font-mono text-xs text-accent uppercase tracking-widest mb-0.5">
+                Spotlight Showcase
+              </p>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-text leading-none">
+                FEATURED PROJECT
+              </h2>
+            </div>
 
             {/* Flip counter */}
-            {!isGrid && (
-              <div className="flex items-center gap-1.5 font-mono text-xs md:text-sm tabular-nums text-text-muted select-none">
-                <div className="overflow-hidden" style={{ height: '1.2em' }}>
-                  <AnimatePresence mode="popLayout">
-                    <motion.span
-                      key={activeIndex}
-                      initial={{ y: '-110%', opacity: 0 }}
-                      animate={{ y: '0%', opacity: 1 }}
-                      exit={{ y: '110%', opacity: 0 }}
-                      transition={{ duration: 0.28, ease: CUSTOM_EASE }}
-                      className="block font-semibold text-text"
-                    >
-                      {String(activeIndex + 1).padStart(2, '0')}
-                    </motion.span>
-                  </AnimatePresence>
-                </div>
-                <span className="text-text-muted/50">—</span>
-                <span>{String(featuredProjects.length).padStart(2, '0')}</span>
+            <div className="flex items-center gap-1.5 font-mono text-xs md:text-sm tabular-nums text-text-muted select-none">
+              <div className="overflow-hidden" style={{ height: '1.2em' }}>
+                <AnimatePresence mode="popLayout">
+                  <motion.span
+                    key={activeIndex}
+                    initial={{ y: '-110%', opacity: 0 }}
+                    animate={{ y: '0%', opacity: 1 }}
+                    exit={{ y: '110%', opacity: 0 }}
+                    transition={{ duration: 0.28, ease: CUSTOM_EASE }}
+                    className="block font-semibold text-text"
+                  >
+                    {String(activeIndex + 1).padStart(2, '0')}
+                  </motion.span>
+                </AnimatePresence>
               </div>
-            )}
+              <span className="text-text-muted/50">—</span>
+              <span>{String(featuredProjects.length).padStart(2, '0')}</span>
+            </div>
           </div>
 
           {/* ══ Side progress bar indicators ══ */}
-          <AnimatePresence>
-            {!isGrid && (
+          <div className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-[60] flex flex-col items-center gap-1.5">
+            {featuredProjects.map((_, i) => (
               <motion.div
-                initial={{ opacity: 0, x: 12 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 12 }}
-                transition={{ duration: 0.35 }}
-                className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-[60] flex flex-col items-center gap-1.5"
-              >
-                {featuredProjects.map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="rounded-full"
-                    animate={{
-                      width: 3,
-                      height: i === activeIndex ? 30 : i < activeIndex ? 8 : 6,
-                      backgroundColor:
-                        i === activeIndex
-                          ? 'rgb(49,130,206)'
-                          : i < activeIndex
-                          ? 'rgba(49,130,206,0.45)'
-                          : 'rgba(0,0,0,0.18)',
-                    }}
-                    transition={{ duration: 0.4, ease: CUSTOM_EASE }}
-                  />
-                ))}
-                <motion.span 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 }}
-                  className="mt-4 font-mono text-sm tracking-[0.2em] text-text-muted/70 uppercase whitespace-nowrap rotate-180"
-                  style={{ writingMode: 'vertical-rl' }}
-                >
-                  Explore ↓
-                </motion.span>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                key={i}
+                className="rounded-full"
+                animate={{
+                  width: 3,
+                  height: i === activeIndex ? 30 : i < activeIndex ? 8 : 6,
+                  backgroundColor:
+                    i === activeIndex
+                      ? 'rgb(49,130,206)'
+                      : i < activeIndex
+                      ? 'rgba(49,130,206,0.45)'
+                      : 'rgba(0,0,0,0.18)',
+                }}
+                transition={{ duration: 0.4, ease: CUSTOM_EASE }}
+              />
+            ))}
+            <span 
+              className="mt-4 font-mono text-sm tracking-[0.2em] text-text-muted/70 uppercase whitespace-nowrap rotate-180"
+              style={{ writingMode: 'vertical-rl' }}
+            >
+              Explore ↓
+            </span>
+          </div>
 
-          {/* ══ Spotlight cards (always mounted for scroll-driven transforms) ══ */}
-          <div
-            className="absolute inset-0"
-            style={{ pointerEvents: isGrid ? 'none' : undefined }}
-          >
+          {/* ══ Spotlight cards ══ */}
+          <div className="absolute inset-0">
             {featuredProjects.map((project, i) => (
               <SpotlightCard
                 key={project.id}
@@ -707,28 +699,76 @@ export function Projects() {
             ))}
           </div>
 
-          {/* ══ Grid phase overlay ══ */}
-          <AnimatePresence>
-            {isGrid && (
-              <motion.div
-                key="grid-overlay"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.45 }}
-                className="absolute inset-0 pt-24 pb-4 px-4 md:px-10 overflow-y-auto"
-              >
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-                  {projects.map((project, i) => (
-                    <GridCard key={project.id} project={project} index={i} />
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
         </div>
       </div>
+
+      {/* ── ALL PROJECTS GRID SECTION (Visible on all devices, naturally scrolled) ── */}
+      <div className="py-24 md:py-32 border-t border-dark-shadow/10 bg-bg/30 relative z-20">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 mb-12 text-center">
+          <p className="font-mono text-xs text-accent uppercase tracking-widest mb-1.5">
+            Full Portfolio
+          </p>
+          <h2 className="text-3xl md:text-5xl font-display font-bold text-text uppercase tracking-tight">
+            All Projects
+          </h2>
+        </div>
+
+        {/* Dynamic Category Filters */}
+        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-12 max-w-4xl mx-auto px-6">
+          {filterCategories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => {
+                setActiveFilter(cat.id);
+                setIsExpanded(false);
+              }}
+              className={`px-5 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+                activeFilter === cat.id
+                  ? 'neo-concave text-accent font-semibold'
+                  : 'neo-btn text-text-muted hover:text-text'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Responsive Neomorphic Card Grid */}
+        <motion.div 
+          layout 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto px-6 md:px-12"
+        >
+          <AnimatePresence mode="popLayout">
+            {getFilteredProjects(activeFilter)
+              .slice(0, isExpanded ? undefined : 4)
+              .map((project, i) => (
+                <motion.div
+                  layout
+                  key={project.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <GridCard project={project} index={i} />
+                </motion.div>
+              ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Expand / Collapse Button */}
+        {getFilteredProjects(activeFilter).length > 4 && (
+          <div className="flex justify-center mt-12">
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="neo-btn px-8 py-3.5 rounded-full font-display font-medium text-sm text-text hover:text-accent transition-all duration-200"
+            >
+              {isExpanded ? 'Show Less' : 'Show all projects'}
+            </button>
+          </div>
+        )}
+      </div>
+
     </section>
   );
 }
