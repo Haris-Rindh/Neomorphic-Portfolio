@@ -314,7 +314,12 @@ export function Terminal({ isOpen, onClose }: TerminalProps) {
               </div>
 
               {/* ── Output history ── */}
-              <div className="flex-1 px-5 py-4 overflow-y-auto font-mono text-sm text-text flex flex-col space-y-1.5">
+              <div
+                data-lenis-prevent
+                onWheel={(e) => e.stopPropagation()}
+                onTouchMove={(e) => e.stopPropagation()}
+                className="flex-1 px-5 py-4 overflow-y-auto font-mono text-sm text-text flex flex-col space-y-1.5"
+              >
                 {history.map((item) => (
                   <div
                     key={item.id}
