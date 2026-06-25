@@ -18,6 +18,7 @@ import MashaAllah from '../assets/MashaAllah_bangles.png';
 import trendtrove from '../assets/trendtrove.png';
 import Surveying from '../assets/UmerSurveying.png';
 import Plumbing from '../assets/CityPlumbing.png';
+import digital from '../assets/digital_agency.png';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Data
@@ -104,7 +105,7 @@ const projects: Project[] = [
     tech: 'React, Tailwind, Framer Motion',
     liveLink: 'https://neongrowth.vercel.app/',
     github: 'https://github.com/Haris-Rindh/neongrowth.git',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200',
+    image: digital,
     featured: false,
   },
   {
