@@ -21,7 +21,7 @@ export function Navbar({ onOpenTerminal }: NavbarProps) {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (localStorage.theme === 'dark') {
       document.documentElement.classList.add('dark');
       setIsDarkMode(true);
     } else {

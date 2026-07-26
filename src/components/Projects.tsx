@@ -58,7 +58,7 @@ const projects: Project[] = [
     liveLink: 'https://nexus-jet-eight-72.vercel.app/',
     github: 'https://github.com/Haris-Rindh/Nexus.git',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200',
-    featured: true,
+    featured: false,
   },
   {
     id: 'prime',
@@ -94,7 +94,7 @@ const projects: Project[] = [
     liveLink: 'https://haris-rindh.github.io/Book-Sphere/',
     github: 'https://github.com/Haris-Rindh/Book-Sphere',
     image: booksphere,
-    featured: false,
+    featured: true,
   },
   {
     id: 'digital',
@@ -151,7 +151,7 @@ const projects: Project[] = [
     description:
       'A browser-based, zero-trust E2EE messaging PWA. All messages, files, and voice recordings are encrypted client-side via ECDH + AES-GCM before reaching Firebase. Features a Duress PIN, disappearing messages, and panic redirect.',
     tech: 'HTML, Firebase, Web Crypto API, PWA, AES-GCM, ECDH',
-    liveLink: 'https://github.com/Haris-Rindh/securechat',
+    liveLink: 'https://secqurechat.vercel.app',
     github: 'https://github.com/Haris-Rindh/securechat',
     image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1200',
     featured: false,

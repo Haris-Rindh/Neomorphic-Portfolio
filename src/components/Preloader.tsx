@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 /* ─────────────────────────────────────────────
    Colour palettes
-───────────────────────────────────────────── */
+ ───────────────────────────────────────────── */
 const HARIS_COLORS = [
   '#2d7dd2', '#1a5fa8', '#5ba3e8',
   '#3d8fe0', '#1e4d8c', '#4a90d9',
@@ -16,13 +16,13 @@ const RINDH_COLORS = [
 
 /* ─────────────────────────────────────────────
    Canvas dimensions
-───────────────────────────────────────────── */
+ ───────────────────────────────────────────── */
 const W = 520;
 const H = 180;
 
 /* ─────────────────────────────────────────────
    Helpers
-───────────────────────────────────────────── */
+ ───────────────────────────────────────────── */
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -58,7 +58,7 @@ function pick<T>(arr: T[]): T {
 
 /* ─────────────────────────────────────────────
    Phase config
-───────────────────────────────────────────── */
+ ───────────────────────────────────────────── */
 type Phase =
   | 'assemble_haris'
   | 'hold_haris'
@@ -86,8 +86,67 @@ const PHASES: Record<Phase, PhaseCfg> = {
 };
 
 /* ─────────────────────────────────────────────
+   Colour utilities
+ ───────────────────────────────────────────── */
+function lightenHex(hex: string, amount: number): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgb(${Math.round(r + (255 - r) * amount)},${Math.round(g + (255 - g) * amount)},${Math.round(b + (255 - b) * amount)})`;
+}
+
+function darkenHex(hex: string, amount: number): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgb(${Math.round(r * (1 - amount))},${Math.round(g * (1 - amount))},${Math.round(b * (1 - amount))})`;
+}
+
+/* ─────────────────────────────────────────────
+   Particle Canvas Cache
+ ───────────────────────────────────────────── */
+const canvasCache = new Map<string, HTMLCanvasElement>();
+
+function getParticleCanvas(color: string, sz: number): HTMLCanvasElement {
+  const key = `${color}_${sz.toFixed(2)}`;
+  let cached = canvasCache.get(key);
+  if (!cached) {
+    cached = document.createElement('canvas');
+    const d = Math.ceil(sz * 2) + 4; // Add padding to avoid clipping
+    cached.width = d;
+    cached.height = d;
+    const c = cached.getContext('2d')!;
+    const center = d / 2;
+
+    // Draw the gradient circle
+    const grd = c.createRadialGradient(
+      center - sz * 0.25, center - sz * 0.25, sz * 0.05,
+      center, center, sz
+    );
+    grd.addColorStop(0, lightenHex(color, 0.35));
+    grd.addColorStop(0.6, color);
+    grd.addColorStop(1, darkenHex(color, 0.25));
+
+    c.beginPath();
+    c.arc(center, center, sz, 0, Math.PI * 2);
+    c.fillStyle = grd;
+    c.fill();
+
+    // Specular glint
+    c.globalAlpha = 0.45;
+    c.beginPath();
+    c.arc(center - sz * 0.3, center - sz * 0.3, sz * 0.28, 0, Math.PI * 2);
+    c.fillStyle = '#fff';
+    c.fill();
+
+    canvasCache.set(key, cached);
+  }
+  return cached;
+}
+
+/* ─────────────────────────────────────────────
    Particle class
-───────────────────────────────────────────── */
+ ───────────────────────────────────────────── */
 class Particle {
   hx: number; hy: number;
   rx: number; ry: number;
@@ -108,7 +167,9 @@ class Particle {
     this.x  = Math.random() * W;
     this.y  = Math.random() * H;
     this.vx = 0; this.vy = 0;
-    this.sz = Math.random() * 1.8 + 1.2;
+    // Quantize size to one of 6 discrete values between 1.2 and 3.0 to keep the cache tiny
+    const possibleSizes = [1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3.0];
+    this.sz = possibleSizes[Math.floor(Math.random() * possibleSizes.length)];
     this.color = hc;
   }
 
@@ -129,54 +190,14 @@ class Particle {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    /* Solid filled dot with a small specular highlight — matches the original design */
-    ctx.save();
-    ctx.translate(this.x, this.y);
-
-    const grd = ctx.createRadialGradient(
-      -this.sz * 0.25, -this.sz * 0.25, this.sz * 0.05,
-      0, 0, this.sz,
-    );
-    grd.addColorStop(0, lightenHex(this.color, 0.35));
-    grd.addColorStop(0.6, this.color);
-    grd.addColorStop(1, darkenHex(this.color, 0.25));
-
-    ctx.beginPath();
-    ctx.arc(0, 0, this.sz, 0, Math.PI * 2);
-    ctx.fillStyle = grd;
-    ctx.fill();
-
-    /* Specular glint */
-    ctx.globalAlpha = 0.45;
-    ctx.beginPath();
-    ctx.arc(-this.sz * 0.3, -this.sz * 0.3, this.sz * 0.28, 0, Math.PI * 2);
-    ctx.fillStyle = '#fff';
-    ctx.fill();
-
-    ctx.restore();
+    const cached = getParticleCanvas(this.color, this.sz);
+    ctx.drawImage(cached, this.x - cached.width / 2, this.y - cached.height / 2);
   }
 }
 
 /* ─────────────────────────────────────────────
-   Colour utilities (kept from original)
-───────────────────────────────────────────── */
-function lightenHex(hex: string, amount: number): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgb(${Math.round(r + (255 - r) * amount)},${Math.round(g + (255 - g) * amount)},${Math.round(b + (255 - b) * amount)})`;
-}
-
-function darkenHex(hex: string, amount: number): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgb(${Math.round(r * (1 - amount))},${Math.round(g * (1 - amount))},${Math.round(b * (1 - amount))})`;
-}
-
-/* ─────────────────────────────────────────────
    ParticleCanvas
-───────────────────────────────────────────── */
+ ───────────────────────────────────────────── */
 interface ParticleCanvasProps {
   onProgressChange: (p: number) => void;
   onStatusChange:   (s: string, label: string, dotActive: boolean) => void;
@@ -309,7 +330,7 @@ function ParticleCanvas({ onProgressChange, onStatusChange, onDone }: ParticleCa
 
 /* ─────────────────────────────────────────────
    Main Preloader component
-───────────────────────────────────────────── */
+ ───────────────────────────────────────────── */
 interface PreloaderProps {
   onComplete: () => void;
 }
