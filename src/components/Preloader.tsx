@@ -77,11 +77,11 @@ interface PhaseCfg {
 }
 
 const PHASES: Record<Phase, PhaseCfg> = {
-  assemble_haris: { dur: 50, next: 'hold_haris',    progFrom:  0, progTo:  40, label: 'haris',      status: 'placing particles'  },
-  hold_haris:     { dur: 25, next: 'burst',         progFrom: 40, progTo:  42, label: 'haris',      status: 'formation locked'   },
-  burst:          { dur: 35, next: 'scatter',       progFrom: 42, progTo:  62, label: 'exploding',  status: 'burst!'             },
-  scatter:        { dur: 20, next: 'assemble_rindh',progFrom: 62, progTo:  68, label: 'in transit', status: 'reforming'          },
-  assemble_rindh: { dur: 60, next: 'done',          progFrom: 68, progTo: 100, label: 'rindh',      status: 'placing particles'  },
+  assemble_haris: { dur: 22, next: 'hold_haris',    progFrom:  0, progTo:  40, label: 'haris',      status: 'placing particles'  },
+  hold_haris:     { dur: 10, next: 'burst',         progFrom: 40, progTo:  42, label: 'haris',      status: 'formation locked'   },
+  burst:          { dur: 14, next: 'scatter',       progFrom: 42, progTo:  62, label: 'exploding',  status: 'burst!'             },
+  scatter:        { dur: 10, next: 'assemble_rindh',progFrom: 62, progTo:  68, label: 'in transit', status: 'reforming'          },
+  assemble_rindh: { dur: 24, next: 'done',          progFrom: 68, progTo: 100, label: 'rindh',      status: 'placing particles'  },
   done:           { dur: Infinity, next: 'done',      progFrom: 100, progTo: 100, label: 'rindh',     status: 'ready'              },
 };
 
@@ -361,8 +361,8 @@ export function Preloader({ onComplete }: PreloaderProps) {
     /* Exit transition after a short hold */
     setTimeout(() => {
       setExitPhase(true);
-      setTimeout(onComplete, 400);
-    }, 400);
+      setTimeout(onComplete, 250);
+    }, 100);
   }, [onComplete]);
 
   return (

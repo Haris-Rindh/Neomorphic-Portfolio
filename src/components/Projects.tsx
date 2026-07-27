@@ -10,15 +10,15 @@ import {
   type MotionValue,
 } from 'motion/react';
 import { ArrowUpRight, Github } from 'lucide-react';
-import booksphere from '../assets/booksphere.png';
-import dentalWebsite from '../assets/dental_website.png';
-import rusticSpoon from '../assets/rustic_spoon.png';
-import skyline from '../assets/skyline.png';
-import MashaAllah from '../assets/MashaAllah_bangles.png';
-import trendtrove from '../assets/trendtrove.png';
-import Surveying from '../assets/UmerSurveying.png';
-import Plumbing from '../assets/CityPlumbing.png';
-import digital from '../assets/digital_agency.png';
+import booksphere from '../assets/booksphere.webp';
+import dentalWebsite from '../assets/dental_website.webp';
+import rusticSpoon from '../assets/rustic_spoon.webp';
+import skyline from '../assets/skyline.webp';
+import MashaAllah from '../assets/MashaAllah_bangles.webp';
+import trendtrove from '../assets/trendtrove.webp';
+import Surveying from '../assets/UmerSurveying.webp';
+import Plumbing from '../assets/CityPlumbing.webp';
+import digital from '../assets/digital_agency.webp';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Data

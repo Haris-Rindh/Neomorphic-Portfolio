@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import Typewriter from 'typewriter-effect';
 import { Magnetic } from './Magnetic';
 import { TextReveal } from './TextReveal';
-import avatarImg from '../assets/avatar.png';
+import avatarImg from '../assets/avatar.webp';
 
 const FiverrIcon = ({ size = 20 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508.02 508.02" width={size} height={size}>
