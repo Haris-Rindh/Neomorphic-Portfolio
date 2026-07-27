@@ -373,6 +373,8 @@ function SpotlightCard({
           <img
             src={project.image}
             alt={project.title}
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-l from-transparent to-bg/25" />
@@ -408,6 +410,8 @@ function GridCard({ project, index }: { project: Project; index: number }) {
         <img
           src={project.image}
           alt={project.title}
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-700"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-black/10 to-transparent" />
@@ -484,6 +488,8 @@ function MobileProjectCard({ project, index }: { project: Project; index: number
         <img
           src={project.image}
           alt={project.title}
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-black/20 to-transparent" />

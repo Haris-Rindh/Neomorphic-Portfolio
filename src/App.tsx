@@ -1,20 +1,22 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, Suspense, lazy } from 'react';
 import { Preloader } from './components/Preloader';
 import { LenisProvider } from './components/LenisProvider';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
-import { Experience } from './components/Experience';
-import { Process } from './components/Process';
-import { Skills } from './components/Skills';
-import { Certifications } from './components/Certifications';
-import { Projects } from './components/Projects';
-import { Contact } from './components/Contact';
-import { Testimonials } from './components/Testimonials';
-import { Terminal } from './components/Terminal';
 import { ScrollProgress } from './components/ScrollProgress';
 import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
+
+// Lazy-load below-the-fold components for faster initial paint
+const Experience = lazy(() => import('./components/Experience').then(m => ({ default: m.Experience })));
+const Process = lazy(() => import('./components/Process').then(m => ({ default: m.Process })));
+const Skills = lazy(() => import('./components/Skills').then(m => ({ default: m.Skills })));
+const Certifications = lazy(() => import('./components/Certifications').then(m => ({ default: m.Certifications })));
+const Projects = lazy(() => import('./components/Projects').then(m => ({ default: m.Projects })));
+const Contact = lazy(() => import('./components/Contact').then(m => ({ default: m.Contact })));
+const Testimonials = lazy(() => import('./components/Testimonials').then(m => ({ default: m.Testimonials })));
+const Terminal = lazy(() => import('./components/Terminal').then(m => ({ default: m.Terminal })));
 
 
 const FiverrIcon = ({ size = 14 }: { size?: number }) => (
@@ -46,18 +48,22 @@ export default function App() {
         <ScrollProgress />
         <CustomCursor />
         <Navbar onOpenTerminal={() => setIsTerminalOpen(true)} />
-        <Terminal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
+        <Suspense fallback={null}>
+          <Terminal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
+        </Suspense>
         
         <main>
           <Hero />
           <About />
-          <Experience />
-          <Projects />
-          <Skills />
-          <Certifications />
-          <Process />
-          <Testimonials />
-          <Contact />
+          <Suspense fallback={null}>
+            <Experience />
+            <Projects />
+            <Skills />
+            <Certifications />
+            <Process />
+            <Testimonials />
+            <Contact />
+          </Suspense>
 
           <footer className="px-6 md:px-12 py-12 border-t border-dark-shadow/10 mt-12 bg-bg/50 backdrop-blur-sm">
              <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-mono uppercase tracking-[0.2em] text-text-muted">

@@ -162,6 +162,10 @@ export function Hero() {
                 <img
                   src={avatarImg}
                   alt="Haris Rindh"
+                  width={500}
+                  height={500}
+                  fetchPriority="high"
+                  decoding="async"
                   className="absolute inset-0 w-full h-full object-cover object-[center_20%] scale-100 group-hover:scale-105 transition-transform duration-700"
                 />
                 {/* Subtle light overlay — simulates Neumorphic glass */}
